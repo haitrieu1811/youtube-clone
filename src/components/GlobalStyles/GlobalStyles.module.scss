@@ -1,10 +1,15 @@
 @import 'normalize.css';
 
 :root {
+    // Colors:
     --primary-color: #ff0000;
     --black-color: #0f0f0f;
     --white-color: #ffffff;
     --text-color: #ffffff;
+    --border-color: #d3d3d3;
+
+    // Sizes:
+    --header-height: 56px;
 }
 
 * {

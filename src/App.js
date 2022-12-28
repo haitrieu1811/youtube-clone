@@ -1,10 +1,34 @@
-import './App.css';
+import { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { publicRoutes } from './routes';
 
 const App = () => {
     return (
-        <div className="App">
-            <h1>My App</h1>
-        </div>
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes &&
+                        publicRoutes.length > 0 &&
+                        publicRoutes.map((route, index) => {
+                            let Layout = route.layout ? route.layout : Fragment;
+                            let Page = route.component;
+
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            );
+                        })}
+                </Routes>
+            </div>
+        </Router>
     );
 };
 

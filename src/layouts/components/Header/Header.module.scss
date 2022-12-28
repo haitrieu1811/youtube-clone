@@ -1,0 +1,88 @@
+.container {
+    background-color: var(--white-color);
+    // background-color: #0c4da2;
+    height: var(--header-height);
+}
+
+.navbar {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+}
+
+.bar-icon {
+    padding: 8px;
+    margin-left: 12px;
+}
+
+.brand-icon {
+    margin-left: 16px;
+}
+
+.search {
+    // margin: 0 0 0 40px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+}
+
+.search-form {
+    border: 1px solid var(--border-color);
+    // padding: 10px 16px;
+    padding-left: 16px;
+    width: 580px;
+    border-radius: 32px;
+    display: flex;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1.6rem;
+}
+
+.search-btn {
+    border-left: 1px solid var(--border-color);
+    background-color: #f8f8f8;
+    color: #d3d3d3;
+    width: 64px;
+    text-align: center;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+.mic-btn {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    margin-left: 12px;
+    border: none;
+    outline: none;
+    color: var(--black-color);
+    background-color: #f9f9f9;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.sign-in {
+    border: 1px solid var(--border-color);
+    padding: 5px 18px;
+    color: #065fd4;
+    font-weight: 600;
+    font-size: 1.5rem;
+    border-radius: 32px;
+    text-decoration: none;
+    margin-right: 16px;
+    margin-left: 10px;
+}
