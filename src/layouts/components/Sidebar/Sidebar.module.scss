@@ -1,3 +1,59 @@
 .container {
-    width: 20%;
+    width: var(--sidebar-width);
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    background-color: var(--white-color);
+    max-height: 100%;
+    max-width: 100%;
+    overflow-y: scroll;
+    padding-bottom: 60px;
+}
+
+.sign-in-wrapper {
+    padding: 10px;
+}
+
+.sign-in {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: var(--black-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    p {
+        margin-bottom: 12px;
+    }
+}
+
+.guide-wrapper {
+    padding: 0 10px;
+}
+
+.guides {
+    padding: 12px;
+}
+
+.guide {
+    a {
+        text-decoration: none;
+        color: #606060;
+        font-size: 1.3rem;
+        font-weight: 600;
+
+        + a {
+            margin-left: 8px;
+        }
+    }
+
+    + .guide {
+        margin-top: 12px;
+    }
+}
+
+.copy-right {
+    color: #909090;
+    font-size: 1.3rem;
+    margin-top: 12px;
 }

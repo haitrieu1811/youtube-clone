@@ -9,4 +9,8 @@
 
 .main {
     flex: 1;
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    min-height: 100vh;
+    padding: 0 36px;
 }

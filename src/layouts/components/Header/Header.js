@@ -1,12 +1,98 @@
+import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
+import 'tippy.js/dist/tippy.css';
 
+import {
+    BarIcon,
+    EarthIcon,
+    FeedbackIcon,
+    KeyboardIcon,
+    LanguageIcon,
+    MoonIcon,
+    OptionIcon,
+    QuestionIcon,
+    SettingIcon,
+    ShieldIcon,
+    YourDataIcon,
+    YoutubeIcon,
+} from '~/components/Icons/Icons';
+import Wrapper from '~/components/Popper/Wrapper';
+import SignInButton from '~/components/SignInButton';
 import styles from './Header.module.scss';
-import { BarIcon, YoutubeIcon, SearchIcon, MicIcon, OptionIcon } from '~/components/Icons/Icons';
+import Menu from './Menu';
+import Search from './Search';
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
+    // Data of menu
+    const MENU_DATA = [
+        {
+            icon: <YourDataIcon width="2.5rem" />,
+            label: 'Your data in Youtube',
+            separate: true,
+            chevron: false,
+        },
+        {
+            icon: <MoonIcon width="2.5rem" />,
+            label: 'Appearance: Light',
+            separate: false,
+            chevron: true,
+        },
+        {
+            icon: <LanguageIcon width="2.5rem" />,
+            label: 'Language: British English',
+            separate: false,
+            chevron: true,
+        },
+        {
+            icon: <ShieldIcon width="2.5rem" />,
+            label: 'Restricted Mode: Off',
+            separate: false,
+            chevron: true,
+        },
+        {
+            icon: <EarthIcon width="2.5rem" />,
+            label: 'Location: Vietnam',
+            separate: false,
+            chevron: true,
+        },
+        {
+            icon: <KeyboardIcon width="2.5rem" />,
+            label: 'Keyboard shortcuts',
+            separate: true,
+            chevron: false,
+        },
+        {
+            icon: <SettingIcon width="2.5rem" />,
+            label: 'Settings',
+            separate: true,
+            chevron: false,
+        },
+        {
+            icon: <QuestionIcon width="2.5rem" />,
+            label: 'Help',
+            separate: false,
+            chevron: false,
+        },
+        {
+            icon: <FeedbackIcon width="2.5rem" />,
+            label: 'Send feedback',
+            separate: false,
+            chevron: false,
+        },
+    ];
+
+    // Render menu
+    const handleRender = () => {
+        return (
+            <Wrapper>
+                <Menu data={MENU_DATA} />
+            </Wrapper>
+        );
+    };
+
     return (
         <>
             <header className={cx('container')}>
@@ -23,25 +109,25 @@ const Header = () => {
                         <span className={cx('brand-logo')}></span>
                     </div>
 
-                    <div className={cx('search')}>
-                        <div className={cx('search-form')}>
-                            <input className={cx('search-input')} placeholder="Search" />
-                            <Link to="/" className={cx('search-btn')}>
-                                <SearchIcon width="2.4rem" />
-                            </Link>
-                        </div>
-
-                        <button className={cx('mic-btn')}>
-                            <MicIcon width="2.5rem" />
-                        </button>
-                    </div>
+                    <Search />
 
                     <div className={cx('actions')}>
-                        <OptionIcon width="2.3rem" />
+                        <Tippy
+                            hideOnClick
+                            placement="bottom-end"
+                            delay={[0, 700]}
+                            interactive
+                            offset={[8, 12]}
+                            // onHide={handleResetMenu}
+                            render={handleRender}
+                            trigger="click"
+                        >
+                            <span className={cx('action-dots')}>
+                                <OptionIcon width="2.3rem" />
+                            </span>
+                        </Tippy>
 
-                        <Link to="/" className={cx('sign-in')}>
-                            Sign in
-                        </Link>
+                        <SignInButton />
                     </div>
                 </nav>
             </header>
