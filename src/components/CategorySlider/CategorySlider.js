@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 
 import styles from './CategorySlider.module.scss';
 import { NextIcon, PrevIcon } from '../Icons/Icons';
+import CircleButton from '../CircleButton';
 
 const cx = classNames.bind(styles);
 
@@ -10,7 +11,7 @@ const CategorySlider = () => {
         <>
             <div className={cx('wrapper')}>
                 {/* <div className={cx('prev')}>
-                    <PrevIcon />
+                    <CircleButton icon={<PrevIcon width="2.4rem" />} />
                 </div> */}
                 <div className={cx('list')}>
                     <div className={cx('item', 'active')}>All</div>
@@ -28,7 +29,7 @@ const CategorySlider = () => {
                     <div className={cx('item')}>Humans</div>
                 </div>
                 <div className={cx('next')}>
-                    <NextIcon width="2.4rem" />
+                    <CircleButton icon={<NextIcon width="2.4rem" />} />
                 </div>
             </div>
         </>

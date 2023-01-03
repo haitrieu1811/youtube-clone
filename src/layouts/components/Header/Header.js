@@ -20,8 +20,9 @@ import {
 import Wrapper from '~/components/Popper/Wrapper';
 import SignInButton from '~/components/SignInButton';
 import styles from './Header.module.scss';
-import Menu from './Menu';
+import Menu from '~/components/Menu';
 import Search from './Search';
+import CircleButton from '~/components/CircleButton';
 
 const cx = classNames.bind(styles);
 
@@ -118,12 +119,11 @@ const Header = () => {
                             delay={[0, 700]}
                             interactive
                             offset={[8, 12]}
-                            // onHide={handleResetMenu}
                             render={handleRender}
                             trigger="click"
                         >
                             <span className={cx('action-dots')}>
-                                <OptionIcon width="2.3rem" />
+                                <CircleButton icon={<OptionIcon width="2.3rem" />} />
                             </span>
                         </Tippy>
 

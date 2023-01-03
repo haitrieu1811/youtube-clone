@@ -4,7 +4,7 @@
     align-items: center;
     position: sticky;
     top: var(--header-height);
-    z-index: 9;
+    z-index: 99999;
     background-color: var(--white-color);
 }
 
@@ -40,22 +40,5 @@
 
 .prev,
 .next {
-    --size: 40px;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-right: 10px;
-    border: 1px solid transparent;
-
-    &:hover {
-        cursor: pointer;
-    }
-
-    &:active {
-        background-color: #eae8e8;
-        border-color: #d5d3d3;
-    }
 }

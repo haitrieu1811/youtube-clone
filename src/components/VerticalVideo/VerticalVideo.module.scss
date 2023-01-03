@@ -8,12 +8,18 @@
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', 'sans-serif';
+
+    &:hover .options {
+        opacity: 1;
+        pointer-events: all;
+    }
 }
 
 .head {
     --thumb-height: 166px;
     position: relative;
     height: var(--thumb-height);
+    user-select: none;
 
     &:hover .keep-hover {
         display: block;
@@ -54,6 +60,7 @@
 .body {
     flex: 1;
     display: flex;
+    align-items: flex-start;
     margin-top: 12px;
 }
 
@@ -63,6 +70,7 @@
     height: var(--size);
     border-radius: 50%;
     object-fit: cover;
+    user-select: none;
 }
 
 .info {
@@ -74,6 +82,12 @@
     font-size: 1.4rem;
     font-weight: 500;
     color: var(--black-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .tick {
@@ -92,13 +106,13 @@
 .channel-name,
 .config {
     color: #606060;
-    font-size: 1.3rem;
 }
 
 .channel-name {
     display: flex;
     align-items: center;
     margin-top: 6px;
+    font-size: 1.2rem;
 }
 
 .config {
@@ -108,7 +122,7 @@
 }
 
 .view {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 .separate {
@@ -121,5 +135,12 @@
 }
 
 .publish-at {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+}
+
+.options {
+    margin-left: 12px;
+    margin-right: -10px;
+    opacity: 0;
+    pointer-events: none;
 }

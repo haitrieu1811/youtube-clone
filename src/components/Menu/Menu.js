@@ -7,11 +7,16 @@ import styles from './Menu.module.scss';
 
 const cx = classNames.bind(styles);
 
-const Menu = ({ data }) => {
+const Menu = ({ data, small = false, large = false }) => {
+    const classes = cx('wrapper', {
+        small,
+        large,
+    });
+
     return (
         <>
             {data && data.length > 0 && (
-                <div className={cx('wrapper')}>
+                <div className={classes}>
                     {data.map((item, index) => (
                         <Link key={index} className={cx('item', { separate: item.separate })}>
                             <span className={cx('icon')}>{item.icon}</span>
@@ -31,6 +36,8 @@ const Menu = ({ data }) => {
 
 Menu.propTypes = {
     data: PropTypes.array.isRequired,
+    small: PropTypes.bool,
+    large: PropTypes.bool,
 };
 
 export default Menu;

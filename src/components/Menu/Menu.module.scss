@@ -1,15 +1,23 @@
 .wrapper {
     min-width: 300px;
+
+    &.small {
+        min-width: 180px;
+    }
+
+    &.large {
+        min-width: 400px;
+    }
 }
 
 .item {
-    --margin: 6px;
+    --margin: 4px;
     position: relative;
     color: rgb(15, 15, 15);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 4px 16px;
+    padding: 2px 16px;
     margin: var(--margin) 0;
     text-decoration: none;
 
