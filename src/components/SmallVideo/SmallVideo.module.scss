@@ -1,0 +1,114 @@
+.wrapper {
+    --height: 94px;
+    display: flex;
+    align-items: flex-start;
+    font-family: 'Roboto', 'sans-serif';
+
+    &:hover .actions {
+        display: block;
+    }
+
+    &:hover .options {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    + .wrapper {
+        margin-top: 12px;
+    }
+}
+
+.thumbnail-wp {
+    position: relative;
+    height: var(--height);
+}
+
+.actions {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: none;
+}
+
+.action {
+    --size: 28px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    + .action {
+        margin-top: 2px;
+    }
+
+    path {
+        fill: var(--white-color);
+    }
+}
+
+.thumbnail {
+    width: 168px;
+    height: var(--height);
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.time {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--white-color);
+    font-size: 1.2rem;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.info {
+    flex: 1;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.title {
+    color: var(--black-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.channel,
+.config {
+    color: #606060;
+    font-size: 1.2rem;
+}
+
+.config {
+    display: flex;
+    align-items: center;
+}
+
+.config-separate {
+    --size: 3px;
+    display: inline-block;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: #606060;
+    margin: 0 6px;
+}
+
+.options {
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+}

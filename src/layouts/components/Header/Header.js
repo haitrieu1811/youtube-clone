@@ -1,10 +1,9 @@
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 import 'tippy.js/dist/tippy.css';
 
+import CircleButton from '~/components/CircleButton';
 import {
-    BarIcon,
     EarthIcon,
     FeedbackIcon,
     KeyboardIcon,
@@ -15,18 +14,17 @@ import {
     SettingIcon,
     ShieldIcon,
     YourDataIcon,
-    YoutubeIcon,
 } from '~/components/Icons/Icons';
+import Menu from '~/components/Menu';
 import Wrapper from '~/components/Popper/Wrapper';
 import SignInButton from '~/components/SignInButton';
+import Logo from '../Logo';
 import styles from './Header.module.scss';
-import Menu from '~/components/Menu';
 import Search from './Search';
-import CircleButton from '~/components/CircleButton';
 
 const cx = classNames.bind(styles);
 
-const Header = () => {
+const Header = ({ handleShowSidebar }) => {
     // Data of menu
     const MENU_DATA = [
         {
@@ -98,18 +96,7 @@ const Header = () => {
         <>
             <header className={cx('container')}>
                 <nav className={cx('navbar')}>
-                    <div className={cx('brand')}>
-                        <Link to="/" className={cx('bar-icon')}>
-                            <BarIcon width="2.4rem" />
-                        </Link>
-
-                        <Link to="/" className={cx('brand-icon')}>
-                            <YoutubeIcon width="9.2rem" />
-                        </Link>
-
-                        <span className={cx('brand-logo')}></span>
-                    </div>
-
+                    <Logo handleShowSidebar={handleShowSidebar} />
                     <Search />
 
                     <div className={cx('actions')}>

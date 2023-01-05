@@ -9,17 +9,13 @@ const cx = classNames.bind(styles);
 
 const DefaultLayout = ({ children }) => {
     return (
-        <>
-            <div className={cx('container')}>
-                <Header />
-
-                <div className={cx('content')}>
-                    <Sidebar />
-
-                    <div className={cx('main')}>{children}</div>
-                </div>
+        <div className={cx('container')}>
+            <Header />
+            <div className={cx('content')}>
+                <Sidebar />
+                <div className={cx('main')}>{children}</div>
             </div>
-        </>
+        </div>
     );
 };
 

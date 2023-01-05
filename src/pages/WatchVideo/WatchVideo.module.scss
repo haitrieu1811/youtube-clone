@@ -1,0 +1,199 @@
+.wrapper {
+    padding-top: 24px;
+    width: 1300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stage {
+    width: 885px;
+}
+
+.video {
+    width: 100%;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.main {
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+.config {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 12px;
+}
+
+.channel {
+    display: flex;
+    align-items: center;
+}
+
+.channel-thumb-wp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.channel-thumb {
+    --size: 42px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.channel-info {
+    flex: 1;
+    margin-left: 12px;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.channel-name {
+    display: flex;
+    align-items: center;
+    color: var(--black-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+
+    svg {
+        margin-left: 6px;
+
+        path {
+            fill: #606060;
+        }
+    }
+}
+
+.channel-subscribers {
+    color: #606060;
+    font-size: 1.2rem;
+}
+
+.subcribe-btn {
+    border: none;
+    outline: none;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    padding: 9px 16px;
+    border-radius: 32px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-left: 24px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+}
+
+.videos {
+    flex: 1;
+    margin-left: 24px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+}
+
+.like-dislike {
+    display: flex;
+    align-items: center;
+    border-radius: 32px;
+    overflow: hidden;
+}
+
+.like-dislike-btn,
+.share {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    background-color: var(--grey-2-color);
+
+    &:hover {
+        cursor: pointer;
+        background-color: #e4e4e4;
+    }
+
+    &:active {
+        background-color: #ebebeb;
+    }
+}
+
+.like-dislike-count,
+.share span {
+    font-size: 1.4rem;
+    color: var(--black-color);
+    margin-left: 6px;
+    font-weight: 500;
+    user-select: none;
+}
+
+.like-dislike-separate {
+    min-width: 1px;
+    min-height: 24px;
+    background-color: #d9d9d9;
+}
+
+.share {
+    border-radius: 32px;
+    margin-left: 12px;
+}
+
+.other-actions {
+    --size: 40px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 50%;
+    background-color: var(--grey-1-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #e4e4e4;
+    }
+
+    &:active {
+        background-color: #d2d2d2;
+    }
+}
+
+.description-wp {
+    margin-top: 12px;
+    border-radius: 12px;
+    background-color: var(--grey-2-color);
+    padding: 24px;
+}
+
+.description-config {
+    font-size: 1.4rem;
+
+    strong {
+        font-weight: 500;
+    }
+
+    strong + strong {
+        margin-left: 6px;
+    }
+}
+
+.description {
+    font-size: 1.4rem;
+    color: var(--black-color);
+}

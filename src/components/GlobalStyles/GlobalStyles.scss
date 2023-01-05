@@ -1,5 +1,5 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap');
 
 :root {
     // Colors:
@@ -8,6 +8,8 @@
     --white-color: #ffffff;
     --text-color: #ffffff;
     --border-color: #d3d3d3;
+    --grey-1-color: #f8f8f8;
+    --grey-2-color: #f2f2f2;
 
     // Sizes:
     --header-height: 56px;

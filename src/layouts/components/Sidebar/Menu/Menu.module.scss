@@ -28,11 +28,11 @@
     border-radius: 10px;
 
     &:hover {
-        background-color: #f2f2f2;
+        background-color: var(--grey-1-color);
     }
 
     &.active {
-        background-color: #f2f2f2;
+        background-color: var(--grey-1-color);
 
         .icon {
             &.empty {

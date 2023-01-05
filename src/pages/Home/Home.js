@@ -1,11 +1,10 @@
-import axios from 'axios';
-import moment from 'moment/moment';
 import { useEffect, useState } from 'react';
 
 import CategorySlider from '~/components/CategorySlider';
 import GridStyles from '~/components/GridStyles';
 import VerticalVideo from '~/components/VerticalVideo';
 import VerticalVideoSkeleton from '~/components/VerticalVideoSkeleton';
+import * as videoService from '~/services/videoService';
 
 const Home = () => {
     const [videos, setVideos] = useState([]);
@@ -13,42 +12,9 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await axios({
-                method: 'GET',
-                url: 'https://www.googleapis.com/youtube/v3/search',
-                params: {
-                    part: 'snippet',
-                    maxResults: 24,
-                    q: 'bóng đá',
-                    type: 'video',
-                    // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-                    // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-                    key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
-                },
-            });
+            const res = await videoService.list('epl', 24);
 
-            const data = res.data.items;
-
-            console.log('>>> Check data: ', data);
-
-            const dataVideos = data.map((item) => {
-                const obj = {};
-
-                obj.thumbnail = item.snippet.thumbnails.high.url;
-                obj.title = item.snippet.title;
-                obj.channelName = item.snippet.channelTitle;
-                obj.channelId = item.snippet.channelId;
-                obj.tick = true;
-                obj.view = '66K';
-                obj.publishAt = moment(item.snippet.publishedAt).format('MM/DD/YYYY');
-
-                return obj;
-            });
-
-            console.log('>>> Data Videos: ', dataVideos);
-
-            setVideos(dataVideos);
-
+            setVideos(res);
             setIsLoading(false);
         })();
     }, []);
