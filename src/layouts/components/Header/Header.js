@@ -105,7 +105,7 @@ const Header = ({ handleShowSidebar }) => {
                             placement="bottom-end"
                             delay={[0, 700]}
                             interactive
-                            offset={[8, 12]}
+                            offset={[0, 2]}
                             render={handleRender}
                             trigger="click"
                         >

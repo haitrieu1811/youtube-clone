@@ -1,0 +1,130 @@
+.wrapper {
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    color: #0f0f0f;
+    margin-bottom: 24px;
+}
+
+.quantity {
+    font-size: 1.7rem;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    margin-left: 34px;
+    user-select: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+
+    span {
+        margin-left: 8px;
+        font-size: 1.5rem;
+    }
+
+    &:active {
+        background-color: var(--grey-2-color);
+    }
+}
+
+.sort-item {
+    padding: 16px;
+    color: var(--black-color);
+    font-size: 1.5rem;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--grey-2-color);
+    }
+}
+
+.form {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    position: relative;
+}
+
+.user {
+    --size: 45px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 16px;
+}
+
+.input-wp {
+    flex: 1;
+}
+
+.input {
+    width: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #909090;
+    padding: 8px 0;
+    margin-bottom: 6px;
+    font-size: 1.4rem;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #e74c3c;
+    }
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-emoji {
+    display: flex;
+    align-items: center;
+
+    p {
+        font-size: 1.2rem;
+        margin-left: 8px;
+        color: var(--black-color);
+    }
+
+    a {
+        color: #065fd4;
+        text-decoration: none;
+        font-weight: 600;
+    }
+}
+
+.emoji-icon {
+    --size: 40px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -12px;
+
+    &:hover {
+        background-color: #606060;
+        cursor: pointer;
+    }
+}
+
+.action-buttons {
+}
+
+.list {
+    margin-bottom: 50px;
+}

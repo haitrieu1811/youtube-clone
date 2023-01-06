@@ -178,7 +178,20 @@
     margin-top: 12px;
     border-radius: 12px;
     background-color: var(--grey-2-color);
-    padding: 24px;
+    padding: 12px;
+    height: 92px;
+    overflow: hidden;
+    margin-bottom: 24px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &.active {
+        // pointer-events: none;
+        height: auto;
+    }
 }
 
 .description-config {
@@ -196,4 +209,13 @@
 .description {
     font-size: 1.4rem;
     color: var(--black-color);
+}
+
+.show-more {
+    margin-left: 4px;
+}
+
+.show-less {
+    font-weight: 600;
+    user-select: none;
 }

@@ -48,10 +48,14 @@ const SmallVideo = ({ data }) => {
             const res = await videoService.channel(data.channelId);
             setChannel(res);
         })();
-    }, []);
+    }, [data.channelId]);
+
+    const handleScrollToTop = () => {
+        window.scrollTo({ top: 0 });
+    };
 
     return (
-        <div className={cx('wrapper')}>
+        <div className={cx('wrapper')} onClick={handleScrollToTop}>
             <Link to={`/watch/${data.videoId}`} className={cx('thumbnail-wp')}>
                 <div className={cx('actions')}>
                     <div className={cx('action')}>

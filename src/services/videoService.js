@@ -11,8 +11,10 @@ export const list = async (q, maxResults) => {
             q: q,
             type: 'video',
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
+            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
             // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
+            key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
     });
 
@@ -49,8 +51,10 @@ export const channel = async (channelId) => {
             maxResults: 1,
             id: channelId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
+            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
             // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
+            key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
     });
 
@@ -73,8 +77,10 @@ export const detail = async (videoId) => {
             part: 'snippet',
             id: videoId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
+            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
             // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
+            key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
     });
 

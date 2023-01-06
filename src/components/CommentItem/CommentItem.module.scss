@@ -1,0 +1,120 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+
+    + .wrapper {
+        margin-top: 24px;
+    }
+}
+
+.avatar-wp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar {
+    --size: 45px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.info {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--black-color);
+}
+
+.time {
+    font-size: 1.3rem;
+    color: #606060;
+    margin-left: 6px;
+}
+
+.body {
+    margin: 4px 0;
+}
+
+.content {
+    color: var(--black-color);
+    font-size: 1.4rem;
+}
+
+.read-more {
+    color: #606060;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 4px;
+    display: inline-block;
+
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+.foot {
+    display: flex;
+    align-items: center;
+}
+
+.like {
+    display: flex;
+    align-items: center;
+
+    + .like {
+        margin-left: 12px;
+    }
+
+    &:first-child {
+        margin-left: -4px;
+    }
+}
+
+.like-icon {
+    --size: 30px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #606060;
+    }
+}
+
+.like-value {
+    color: #606060;
+    font-size: 1.2rem;
+}
+
+.reply {
+    padding: 6px 12px;
+    border-radius: 32px;
+    font-size: 1.4rem;
+    color: var(--black-color);
+    font-weight: 600;
+    margin-left: 12px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: #606060;
+    }
+}

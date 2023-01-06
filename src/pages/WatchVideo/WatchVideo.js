@@ -21,6 +21,7 @@ import Share from '~/components/Share';
 import SmallVideo from '~/components/SmallVideo';
 import * as videoService from '~/services/videoService';
 import styles from './WatchVideo.module.scss';
+import Comment from '~/components/Comment';
 
 const cx = classNames.bind(styles);
 
@@ -29,6 +30,10 @@ const VideoDetail = () => {
     const [video, setVideo] = useState();
     const [channel, setChannel] = useState();
     const [showModal, setShowModal] = useState(false);
+
+    const [showMore, setShowMore] = useState(true);
+    const [showLess, setShowLess] = useState(false);
+    const [descActive, setDescActive] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -73,12 +78,26 @@ const VideoDetail = () => {
         setShowModal((prevState) => !prevState);
     };
 
+    const handleShowMore = () => {
+        setShowMore(false);
+        setShowLess(true);
+        setDescActive(true);
+    };
+
+    const handleShowLess = () => {
+        setShowMore(true);
+        setShowLess(false);
+        setDescActive(false);
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
     // Videos
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         (async () => {
-            const res = await videoService.list('epl', 6);
+            const res = await videoService.list('epl', 24);
             setVideos(res);
         })();
     }, []);
@@ -163,13 +182,26 @@ const VideoDetail = () => {
                                 </div>
                             </div>
 
-                            <div className={cx('description-wp')}>
+                            <div className={cx('description-wp', { active: descActive })}>
                                 <div className={cx('description-config')}>
                                     <strong>233,976 views</strong> <strong>24 Dec 2022</strong>
                                 </div>
-                                <div className={cx('description')}>{video.description}</div>
+                                <div className={cx('description')}>
+                                    {descActive ? video.description : video.description.substring(0, 240)}
+                                    {showMore && !showLess && (
+                                        <strong className={cx('show-more')} onClick={handleShowMore}>
+                                            Show more
+                                        </strong>
+                                    )}
+                                    {showLess && !showMore && (
+                                        <div className={cx('show-less')} onClick={handleShowLess}>
+                                            Show less
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
+                        <Comment videoId={videoId} />
                     </>
                 )}
             </div>

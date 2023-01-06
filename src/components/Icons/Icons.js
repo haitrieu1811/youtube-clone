@@ -974,3 +974,37 @@ export const WatchLaterIcon = ({ width = '3.6rem', height = '3.6rem', className 
         </svg>
     );
 };
+
+export const SortIcon = ({ width = '3.6rem', height = '3.6rem', className }) => {
+    return (
+        <svg
+            className={className}
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+        >
+            <g>
+                <path d="M21,6H3V5h18V6z M15,11H3v1h12V11z M9,17H3v1h6V17z"></path>
+            </g>
+        </svg>
+    );
+};
+
+export const EmojiIcon = ({ width = '3.6rem', height = '3.6rem', className }) => {
+    return (
+        <svg
+            className={className}
+            width={width}
+            height={height}
+            viewBox="0 0 24 24"
+            preserveAspectRatio="xMidYMid meet"
+            focusable="false"
+        >
+            <g>
+                <path d="M12,2C6.48,2,2,6.48,2,12c0,5.52,4.48,10,10,10s10-4.48,10-10C22,6.48,17.52,2,12,2z M12,21c-4.96,0-9-4.04-9-9 c0-4.96,4.04-9,9-9s9,4.04,9,9C21,16.96,16.96,21,12,21z M17,13c0,1-1,4-5,4s-5-3-5-4C8,13,16,13,17,13z M6.05,10 C6.28,8.86,7.29,8,8.5,8s2.22,0.86,2.45,2H9.91C9.7,9.42,9.15,9,8.5,9s-1.2,0.42-1.41,1H6.05z M13.05,10c0.23-1.14,1.24-2,2.45-2 s2.22,0.86,2.45,2h-1.04c-0.21-0.58-0.76-1-1.41-1s-1.2,0.42-1.41,1H13.05z"></path>
+            </g>
+        </svg>
+    );
+};
