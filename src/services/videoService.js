@@ -10,8 +10,8 @@ export const list = async (q, maxResults) => {
             maxResults: maxResults,
             q: q,
             type: 'video',
-            key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
+            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
+            key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
             // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
             // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
             // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
@@ -30,6 +30,7 @@ export const list = async (q, maxResults) => {
         obj.title = item.snippet.title;
         obj.channelName = item.snippet.channelTitle;
         obj.channelId = item.snippet.channelId;
+        obj.description = item.snippet.description;
         obj.tick = true;
         obj.view = '66K';
         obj.publishAt = moment(item.snippet.publishedAt).format('MM/DD/YYYY');

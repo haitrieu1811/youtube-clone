@@ -1,25 +1,25 @@
 import classNames from 'classnames/bind';
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { CancelIcon, MicIcon, SearchIcon } from '~/components/Icons/Icons';
 import Modal from '~/components/Modal';
-import styles from './Search.module.scss';
 import VoiceSearch from '../VoiceSearch';
+import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
 const Search = () => {
-    const [keyword, setKeyword] = useState('');
+    const [query, setQuery] = useState('');
     const [clear, setClear] = useState(false);
-
     const [showModal, setShowModal] = useState(false);
-
     const searchBox = useRef();
+    const navigate = useNavigate();
 
-    // Change Value of keyword
+    // Change Value of query
     const handleChangeKeyword = (e) => {
         const newKeyword = e.target.value;
-        setKeyword(newKeyword);
+        setQuery(newKeyword);
 
         // Hide/Show clear button
         if (newKeyword.length > 0) setClear(true);
@@ -28,8 +28,8 @@ const Search = () => {
 
     // Clear input
     const handleClearKeyword = () => {
-        if (keyword.length > 0) {
-            setKeyword('');
+        if (query.trim().length > 0) {
+            setQuery('');
             setClear(false);
 
             searchBox.current.focus();
@@ -46,40 +46,48 @@ const Search = () => {
         setShowModal(false);
     };
 
+    // Handle search submit
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (query.trim().length > 0) {
+            window.scrollTo({ top: 0 });
+            return navigate(`/results/${query}`);
+        }
+    };
+
     return (
-        <>
-            <div className={cx('container')}>
-                <div className={cx('form')}>
-                    <span className={cx('icon')}>
-                        <SearchIcon width="2rem" />
+        <div className={cx('container')}>
+            <form className={cx('form')} onSubmit={handleSubmit}>
+                <span className={cx('icon')}>
+                    <SearchIcon width="2rem" />
+                </span>
+
+                <input
+                    ref={searchBox}
+                    className={cx('input')}
+                    placeholder="Search"
+                    value={query}
+                    onChange={(e) => handleChangeKeyword(e)}
+                />
+
+                {clear && (
+                    <span className={cx('clear')} onClick={handleClearKeyword}>
+                        <CancelIcon width="2.4rem" />
                     </span>
+                )}
 
-                    <input
-                        ref={searchBox}
-                        className={cx('input')}
-                        placeholder="Search"
-                        value={keyword}
-                        onChange={(e) => handleChangeKeyword(e)}
-                    />
-
-                    {clear && (
-                        <span className={cx('clear')} onClick={handleClearKeyword}>
-                            <CancelIcon width="2.4rem" />
-                        </span>
-                    )}
-
-                    <button type="button" className={cx('btn')}>
-                        <SearchIcon width="2.3rem" />
-                    </button>
-                </div>
-
-                <button className={cx('mic-btn')} onClick={handleShowModal}>
-                    <MicIcon width="2.3rem" />
+                <button type="submit" className={cx('btn')}>
+                    <SearchIcon width="2.3rem" />
                 </button>
+            </form>
 
-                <Modal content={<VoiceSearch />} top medium show={showModal} handleClose={handleCloseModal} />
-            </div>
-        </>
+            <button className={cx('mic-btn')} onClick={handleShowModal}>
+                <MicIcon width="2.3rem" />
+            </button>
+
+            <Modal content={<VoiceSearch />} top medium show={showModal} handleClose={handleCloseModal} />
+        </div>
     );
 };
 

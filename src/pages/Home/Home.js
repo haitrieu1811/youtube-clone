@@ -12,7 +12,7 @@ const Home = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await videoService.list('epl', 24);
+            const res = await videoService.list('epl', 48);
 
             setVideos(res);
             setIsLoading(false);

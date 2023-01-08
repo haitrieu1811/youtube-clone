@@ -1,0 +1,124 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 1086px;
+
+    + .wrapper {
+        margin-top: 16px;
+    }
+}
+
+.thumbnail-wp {
+    --width: 360px;
+    --height: 202px;
+    width: var(--width);
+    height: var(--height);
+    text-decoration: none;
+    position: relative;
+}
+
+.thumbnail {
+    width: var(--width);
+    height: var(--height);
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.time {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--white-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.info {
+    flex: 1;
+    text-decoration: none;
+    font-family: 'Roboto', 'sans-serif';
+    margin-left: 16px;
+}
+
+.title {
+    color: var(--black-color);
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.config {
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.config-value {
+    color: #606060;
+}
+
+.config-separate {
+    --size: 3px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: #606060;
+    margin: 0 6px;
+}
+
+.channel {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.channel-thumbnail {
+    --size: 24px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.channel-name {
+    color: #606060;
+    font-size: 1.2rem;
+    margin: 0 8px;
+}
+
+.channel-tick {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    path {
+        fill: #606060;
+    }
+}
+
+.actions {
+    margin-top: -10px;
+    margin-left: 6px;
+}
+
+.description {
+    color: #606060;
+    font-size: 1.3rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.new {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #606060;
+    background-color: var(--grey-2-color);
+    padding: 2px 6px;
+}

@@ -1,5 +1,5 @@
 .wrapper {
-    --height: 94px;
+    --height: 10vh;
     display: flex;
     align-items: flex-start;
     font-family: 'Roboto', 'sans-serif';
@@ -50,7 +50,7 @@
 }
 
 .thumbnail {
-    width: 168px;
+    width: 18vh;
     height: var(--height);
     border-radius: 8px;
     object-fit: cover;
