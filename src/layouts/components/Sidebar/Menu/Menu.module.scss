@@ -26,6 +26,7 @@
     text-decoration: none;
     padding: 1px 12px;
     border-radius: 10px;
+    user-select: none;
 
     &:hover {
         background-color: var(--grey-1-color);
@@ -35,12 +36,20 @@
         background-color: var(--grey-1-color);
 
         .icon {
+            &.fill {
+                display: flex;
+            }
+        }
+
+        .label {
+            font-weight: 600;
+        }
+    }
+
+    &.active:has(.fill) {
+        .icon {
             &.empty {
                 display: none;
-            }
-
-            &.fill {
-                display: block;
             }
         }
     }

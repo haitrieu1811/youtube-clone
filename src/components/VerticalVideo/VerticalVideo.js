@@ -1,19 +1,18 @@
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import PropTyes from 'prop-types';
-import { Link } from 'react-router-dom';
 import moment from 'moment';
-import axios from 'axios';
+import PropTyes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { DownloadIcon } from '~/components/Icons/Icons';
+import * as videoService from '~/services/videoService';
+import { diffDays } from '~/utils/diffDays';
+import CircleButton from '../CircleButton';
 import { AddQueueIcon, OptionIcon, ShareIcon, TickIcon } from '../Icons/Icons';
 import Menu from '../Menu';
 import Wrapper from '../Popper/Wrapper';
 import styles from './VerticalVideo.module.scss';
-import CircleButton from '../CircleButton';
-import { diffDays } from '~/utils/diffDays';
-import * as videoService from '~/services/videoService';
 
 const cx = classNames.bind(styles);
 

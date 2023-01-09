@@ -14,6 +14,7 @@ const VoiceSearch = () => {
                     <span className={cx('mic-btn')}>
                         <MicIcon width="4rem" height="4rem" className={cx('mic-icon')} />
                     </span>
+                    <span className={cx('shadow')}></span>
                 </div>
             </div>
         </>

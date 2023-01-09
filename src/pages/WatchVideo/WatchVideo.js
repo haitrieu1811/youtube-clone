@@ -97,7 +97,7 @@ const VideoDetail = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await videoService.list('epl', 24);
+            const res = await videoService.list('blv anh quân', 24);
             setVideos(res);
         })();
     }, []);

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Comment.module.scss';
@@ -19,6 +19,22 @@ const Comment = ({ videoId }) => {
     const [isPrimary, setIsPrimary] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
     const [comments, setComments] = useState([]);
+    const [commentQuantity, setCommentQuantity] = useState(10);
+
+    const observer = useRef();
+    const lastBookElementRef = useCallback((node) => {
+        if (observer.current) observer.current.disconnect();
+
+        observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setCommentQuantity((prevState) => prevState + 20);
+            }
+        });
+
+        if (node) observer.current.observe(node);
+
+        console.log(node);
+    }, []);
 
     const handleRenderSort = () => {
         return (
@@ -51,10 +67,10 @@ const Comment = ({ videoId }) => {
     // Load comments
     useEffect(() => {
         (async () => {
-            const res = await commentService.list(videoId);
+            const res = await commentService.list(videoId, commentQuantity);
             setComments(res);
         })();
-    }, [videoId]);
+    }, [videoId, commentQuantity]);
 
     return (
         <div className={cx('wrapper')}>
@@ -105,9 +121,17 @@ const Comment = ({ videoId }) => {
 
             {comments && comments.length > 0 && (
                 <div className={cx('list')}>
-                    {comments.map((comment, index) => (
-                        <CommentItem key={index} data={comment} />
-                    ))}
+                    {comments.map((comment, index) => {
+                        if (comments.length === index + 1) {
+                            return (
+                                <div ref={lastBookElementRef} key={index}>
+                                    <CommentItem data={comment} />
+                                </div>
+                            );
+                        } else {
+                            return <CommentItem key={index} data={comment} />;
+                        }
+                    })}
                 </div>
             )}
         </div>

@@ -6,6 +6,10 @@
     + .wrapper {
         margin-top: 16px;
     }
+
+    &:hover .actions {
+        display: block;
+    }
 }
 
 .thumbnail-wp {
@@ -15,6 +19,32 @@
     height: var(--height);
     text-decoration: none;
     position: relative;
+}
+
+.actions {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    display: none;
+}
+
+.action {
+    --size: 28px;
+    height: var(--size);
+    width: var(--size);
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    + .action {
+        margin-top: 2px;
+    }
+
+    path {
+        fill: var(--white-color);
+    }
 }
 
 .thumbnail {
@@ -98,7 +128,7 @@
     }
 }
 
-.actions {
+.options {
     margin-top: -10px;
     margin-left: 6px;
 }

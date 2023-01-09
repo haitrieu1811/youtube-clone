@@ -10,7 +10,8 @@ const SignInButton = () => {
     return (
         <>
             <Link to="/" className={cx('wrapper')}>
-                <UserIcon width="2.4rem" /> <span>Sign in</span>
+                <UserIcon width="2.4rem" height="2.4rem" />
+                <span>Sign in</span>
             </Link>
         </>
     );

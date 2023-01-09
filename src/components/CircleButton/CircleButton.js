@@ -5,14 +5,18 @@ import styles from './CircleButton.module.scss';
 
 const cx = classNames.bind(styles);
 
-const CircleButton = ({ icon, large = false, small = false, hide = false }) => {
+const CircleButton = ({ icon, large = false, small = false, hide = false, onClick = () => {} }) => {
     const classes = cx('wrapper', {
         large,
         small,
         hide,
     });
 
-    return <span className={classes}>{icon}</span>;
+    return (
+        <span className={classes} onClick={onClick}>
+            {icon}
+        </span>
+    );
 };
 
 CircleButton.propTypes = {
@@ -20,6 +24,7 @@ CircleButton.propTypes = {
     large: PropTypes.bool,
     small: PropTypes.bool,
     medium: PropTypes.bool,
+    onClick: PropTypes.func,
 };
 
 export default CircleButton;

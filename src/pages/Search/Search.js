@@ -22,8 +22,8 @@ const Search = () => {
     return (
         <>
             <div className={cx('wrapper')}>
-                {videos.map((video) => (
-                    <HorizontalVideo data={video} />
+                {videos.map((video, index) => (
+                    <HorizontalVideo key={index} data={video} />
                 ))}
             </div>
         </>

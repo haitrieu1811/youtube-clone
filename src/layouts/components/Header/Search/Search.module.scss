@@ -12,6 +12,7 @@
     width: 580px;
     border-radius: 32px;
     display: flex;
+    align-items: center;
 
     &:focus-within .icon {
         display: flex;

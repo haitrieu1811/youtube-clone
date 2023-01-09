@@ -101,7 +101,6 @@ const Header = ({ handleShowSidebar }) => {
 
                     <div className={cx('actions')}>
                         <Tippy
-                            hideOnClick
                             placement="bottom-end"
                             delay={[0, 700]}
                             interactive

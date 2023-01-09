@@ -11,40 +11,28 @@
 }
 
 .item {
-    --margin: 4px;
     position: relative;
     color: rgb(15, 15, 15);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2px 16px;
-    margin: var(--margin) 0;
+    padding: 4px 16px;
     text-decoration: none;
+    user-select: none;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
 
     &.separate {
-        &::after {
-            display: block;
-        }
+        border-bottom-color: var(--border-color);
     }
 
     &:hover {
         background-color: var(--grey-1-color);
     }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: calc(100% + var(--margin));
-        left: 0;
-        right: 0;
-        height: 1px;
-        background-color: var(--border-color);
-        display: none;
-    }
 }
 
 .icon {
-    width: 40px;
+    width: 42px;
     display: flex;
     align-items: center;
 }

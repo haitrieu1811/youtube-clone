@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 
 const CommentItem = ({ data }) => {
     const [isReadMore, setIsReadMore] = useState(false);
-    const showReadMore = data.content.length > 400 ? true : false;
+    const showReadMore = data.content.length > 240 ? true : false;
 
     const handleReadMore = () => {
         setIsReadMore((prevState) => !prevState);
@@ -33,7 +33,7 @@ const CommentItem = ({ data }) => {
                     ) : (
                         <div
                             className={cx('content')}
-                            dangerouslySetInnerHTML={{ __html: data.content.substring(0, 400) }}
+                            dangerouslySetInnerHTML={{ __html: data.content.substring(0, 240) }}
                         ></div>
                     )}
 

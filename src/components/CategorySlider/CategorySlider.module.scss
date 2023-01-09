@@ -1,18 +1,25 @@
 .wrapper {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
+    padding: 12px 0;
     top: var(--header-height);
     z-index: 99999;
     background-color: var(--white-color);
 }
 
-.list {
+.list-wp {
     flex: 1;
+    max-width: 1200px;
+    overflow-x: hidden;
+}
+
+.list {
     display: flex;
     align-items: center;
-    padding: 12px 0;
+    transition: all 0.1s ease;
 }
 
 .item {
@@ -22,6 +29,7 @@
     border-radius: 8px;
     font-size: 1.4rem;
     white-space: nowrap;
+    user-select: none;
 
     + .item {
         margin-left: 12px;
@@ -30,6 +38,7 @@
     &.active {
         background-color: var(--black-color);
         color: var(--white-color);
+        pointer-events: none;
     }
 
     &:hover {
@@ -38,7 +47,10 @@
     }
 }
 
-.prev,
-.next {
+.prev {
     margin-right: 10px;
+}
+
+.next {
+    margin-left: 10px;
 }

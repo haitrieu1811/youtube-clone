@@ -7,7 +7,7 @@ import moment from 'moment';
 
 import styles from './HorizontalVideo.module.scss';
 import CircleButton from '../CircleButton';
-import { AddQueueIcon, OptionIcon, TickIcon } from '../Icons/Icons';
+import { AddQueueIcon, OptionIcon, TickIcon, WatchLaterIcon } from '../Icons/Icons';
 import Wrapper from '../Popper/Wrapper';
 import Menu from '../Menu';
 import * as videoService from '~/services/videoService';
@@ -25,7 +25,7 @@ const HorizontalVideo = ({ data }) => {
         },
     ];
 
-    const handleRenderActions = () => {
+    const handleRenderOptions = () => {
         return (
             <Wrapper>
                 <Menu data={MENU_DATA} small />
@@ -46,6 +46,14 @@ const HorizontalVideo = ({ data }) => {
             {data && channel && (
                 <div className={cx('wrapper')}>
                     <Link to={`/watch/${data.videoId}`} className={cx('thumbnail-wp')}>
+                        <div className={cx('actions')}>
+                            <div className={cx('action')}>
+                                <WatchLaterIcon width="2.4rem" height="2.4rem" />
+                            </div>
+                            <div className={cx('action')}>
+                                <AddQueueIcon width="2.4rem" height="2.4rem" />
+                            </div>
+                        </div>
                         <img className={cx('thumbnail')} src={data.thumbnail} alt={data.title} />
                         <span className={cx('time')}>19:41</span>
                     </Link>
@@ -68,8 +76,8 @@ const HorizontalVideo = ({ data }) => {
                         <div className={cx('description')}>{data.description}</div>
                         <span className={cx('new')}>New</span>
                     </Link>
-                    <Tippy interactive placement="bottom-end" trigger="click" render={handleRenderActions}>
-                        <span className={cx('actions')}>
+                    <Tippy interactive placement="bottom-end" trigger="click" render={handleRenderOptions}>
+                        <span className={cx('options')}>
                             <CircleButton icon={<OptionIcon width="2.4rem" height="2.4rem" />} />
                         </span>
                     </Tippy>

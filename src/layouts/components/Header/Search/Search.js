@@ -73,7 +73,7 @@ const Search = () => {
 
                 {clear && (
                     <span className={cx('clear')} onClick={handleClearKeyword}>
-                        <CancelIcon width="2.4rem" />
+                        <CancelIcon width="2.4rem" height="2.4rem" />
                     </span>
                 )}
 
