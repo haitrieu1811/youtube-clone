@@ -1,8 +1,9 @@
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import Comment from '~/components/Comment';
 import {
     DislikeIcon,
     DownloadIcon,
@@ -18,12 +19,13 @@ import Menu from '~/components/Menu';
 import Modal from '~/components/Modal';
 import Wrapper from '~/components/Popper/Wrapper';
 import Share from '~/components/Share';
-import SmallVideo from '~/components/SmallVideo';
+import SmallVideoSkeleton from '~/components/SmallVideoSkeleton';
 import * as videoService from '~/services/videoService';
 import styles from './WatchVideo.module.scss';
-import Comment from '~/components/Comment';
 
 const cx = classNames.bind(styles);
+
+const AsideVideo = React.lazy(() => import('~/components/SmallVideo'));
 
 const VideoDetail = () => {
     const { videoId } = useParams();
@@ -209,7 +211,9 @@ const VideoDetail = () => {
             {videos && videos.length > 0 && (
                 <div className={cx('videos')}>
                     {videos.map((item, index) => (
-                        <SmallVideo key={index} data={item} />
+                        <Suspense key={index} fallback={<SmallVideoSkeleton />}>
+                            <AsideVideo data={item} />
+                        </Suspense>
                     ))}
                 </div>
             )}

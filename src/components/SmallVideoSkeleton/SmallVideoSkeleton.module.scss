@@ -1,0 +1,45 @@
+.wrapper {
+    --height: 10vh;
+    display: flex;
+    align-items: flex-start;
+
+    + .wrapper {
+        margin-top: 12px;
+    }
+}
+
+.thumbnail-wp {
+    position: relative;
+    width: 18vh;
+    min-height: var(--height);
+    background-color: var(--skeleton-color);
+    border-radius: 8px;
+}
+
+.info {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.title,
+.channel,
+.config {
+    height: 8px;
+    background-color: var(--skeleton-color);
+    border-radius: 6px;
+}
+
+.title {
+    margin-bottom: 3px;
+    width: 80%;
+}
+
+.channel {
+    width: 70%;
+    margin-top: 8px;
+}
+
+.config {
+    width: 60%;
+    margin-top: 8px;
+}

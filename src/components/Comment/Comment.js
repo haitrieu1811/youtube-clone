@@ -19,7 +19,7 @@ const Comment = ({ videoId }) => {
     const [isPrimary, setIsPrimary] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
     const [comments, setComments] = useState([]);
-    const [commentQuantity, setCommentQuantity] = useState(10);
+    const [commentQuantity, setCommentQuantity] = useState(5);
 
     const observer = useRef();
     const lastBookElementRef = useCallback((node) => {
@@ -27,7 +27,7 @@ const Comment = ({ videoId }) => {
 
         observer.current = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                setCommentQuantity((prevState) => prevState + 20);
+                setCommentQuantity((prevState) => prevState + 10);
             }
         });
 

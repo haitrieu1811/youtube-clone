@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-const CategorySlider = ({ data }) => {
+const CategorySlider = ({ data, onChangeCategory = () => {} }) => {
     const [position, setPosition] = useState(0);
     const [showPrev, setShowPrev] = useState(false);
     const [showNext, setShowNext] = useState(true);
@@ -37,43 +37,43 @@ const CategorySlider = ({ data }) => {
         }
     };
 
-    const handleChoose = (e) => {
-        e.target.classList.add(cx('active'));
-    };
-
     return (
-        <>
-            <div className={cx('wrapper')}>
-                {showPrev && (
-                    <div className={cx('prev')}>
-                        <CircleButton icon={<PrevIcon width="2.4rem" />} onClick={handlePrev} />
-                    </div>
-                )}
-
-                <div className={cx('list-wp')}>
-                    <div className={cx('list')} style={{ transform: `translateX(${position}px)` }}>
-                        {data &&
-                            data.length > 0 &&
-                            data.map((item, index) => (
-                                <div key={index} className={cx('item')} onClick={(e) => handleChoose(e)}>
-                                    {item}
-                                </div>
-                            ))}
-                    </div>
+        <div className={cx('wrapper')}>
+            {showPrev && (
+                <div className={cx('prev')}>
+                    <CircleButton icon={<PrevIcon width="2.4rem" />} onClick={handlePrev} />
                 </div>
+            )}
 
-                {showNext && (
-                    <div className={cx('next')}>
-                        <CircleButton icon={<NextIcon width="2.4rem" />} onClick={handleNext} />
-                    </div>
-                )}
+            <div className={cx('list-wp')}>
+                <div className={cx('list')} style={{ transform: `translateX(${position}px)` }}>
+                    {data &&
+                        data.length > 0 &&
+                        data.map((item, index) => (
+                            <div
+                                key={index}
+                                className={cx('item')}
+                                onClick={(e) => onChangeCategory(e.target.dataset.value)}
+                                data-value={item.value}
+                            >
+                                {item.label}
+                            </div>
+                        ))}
+                </div>
             </div>
-        </>
+
+            {showNext && (
+                <div className={cx('next')}>
+                    <CircleButton icon={<NextIcon width="2.4rem" />} onClick={handleNext} />
+                </div>
+            )}
+        </div>
     );
 };
 
 CategorySlider.propTypes = {
     data: PropTypes.array.isRequired,
+    onChangeCategory: PropTypes.func,
 };
 
 export default CategorySlider;

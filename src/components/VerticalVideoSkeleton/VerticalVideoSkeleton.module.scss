@@ -4,22 +4,14 @@
 }
 
 .main {
-    text-decoration: none;
     display: flex;
     flex-direction: column;
-    font-family: 'Roboto', 'sans-serif';
-
-    &:hover .options {
-        opacity: 1;
-        pointer-events: all;
-    }
 }
 
 .head {
     --thumb-height: 19vh;
     position: relative;
     height: var(--thumb-height);
-    user-select: none;
 
     &:hover .keep-hover {
         display: block;
@@ -29,9 +21,8 @@
 .thumbnail {
     width: 100%;
     height: var(--thumb-height);
-    object-fit: cover;
     border-radius: 12px;
-    background-color: #d2d3d3;
+    background-color: var(--skeleton-color);
 }
 
 .body {
@@ -46,7 +37,31 @@
     width: var(--size);
     height: var(--size);
     border-radius: 50%;
-    object-fit: cover;
-    user-select: none;
-    background-color: #d2d3d3;
+    background-color: var(--skeleton-color);
+}
+
+.info {
+    flex: 1;
+    margin-left: 18px;
+}
+
+.title,
+.channel,
+.config {
+    background-color: var(--skeleton-color);
+    height: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.title {
+    width: 80%;
+}
+
+.channel {
+    width: 70%;
+}
+
+.config {
+    width: 60%;
 }

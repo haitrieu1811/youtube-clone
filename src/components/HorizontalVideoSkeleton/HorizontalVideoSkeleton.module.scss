@@ -1,0 +1,49 @@
+.wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 1086px;
+
+    + .wrapper {
+        margin-top: 16px;
+    }
+}
+
+.thumbnail-wp {
+    --width: 360px;
+    --height: 202px;
+    width: var(--width);
+    height: var(--height);
+    background-color: var(--skeleton-color);
+    border-radius: 12px;
+}
+
+.info {
+    flex: 1;
+    margin-left: 16px;
+}
+
+.title,
+.config,
+.channel,
+.description {
+    height: 12px;
+    background-color: var(--skeleton-color);
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+.title {
+    width: 90%;
+}
+
+.config {
+    width: 80%;
+}
+
+.channel {
+    width: 70%;
+}
+
+.description {
+    width: 60%;
+}

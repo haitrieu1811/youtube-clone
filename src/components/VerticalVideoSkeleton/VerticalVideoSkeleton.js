@@ -13,6 +13,11 @@ const VerticalVideoSkeleton = () => {
                 </div>
                 <div className={cx('body')}>
                     <div className={cx('channel-thumb')}></div>
+                    <div className={cx('info')}>
+                        <div className={cx('title')}></div>
+                        <div className={cx('channel')}></div>
+                        <div className={cx('config')}></div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,10 +1,12 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import HorizontalVideoSkeleton from '~/components/HorizontalVideoSkeleton';
 
-import styles from './Search.module.scss';
-import HorizontalVideo from '~/components/HorizontalVideo';
 import * as videoService from '~/services/videoService';
+import styles from './Search.module.scss';
+
+const Video = React.lazy(() => import('~/components/HorizontalVideo'));
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +25,9 @@ const Search = () => {
         <>
             <div className={cx('wrapper')}>
                 {videos.map((video, index) => (
-                    <HorizontalVideo key={index} data={video} />
+                    <Suspense key={index} fallback={<HorizontalVideoSkeleton />}>
+                        <Video data={video} />
+                    </Suspense>
                 ))}
             </div>
         </>
