@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import styles from './CommentItem.module.scss';
 import { DislikeIcon, LikeIcon } from '../Icons/Icons';
+import styles from './CommentItem.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +24,7 @@ const CommentItem = ({ data }) => {
             <div className={cx('info')}>
                 <div className={cx('head')}>
                     <Link className={cx('name')}>{data.name}</Link>
-                    <span className={cx('time')}>{moment(data.publishedAt).format('DD/MM/YYYY')}</span>
+                    <span className={cx('time')}>{data.publishedSince}</span>
                 </div>
                 <div className={cx('body')}>
                     {isReadMore ? (

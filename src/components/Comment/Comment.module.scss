@@ -10,17 +10,18 @@
 }
 
 .quantity {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
 }
 
 .sort {
     display: flex;
     align-items: center;
+    font-weight: 500;
     margin-left: 34px;
     user-select: none;
-    cursor: pointer;
     padding: 8px;
     border-radius: 8px;
+    cursor: pointer;
 
     span {
         margin-left: 8px;

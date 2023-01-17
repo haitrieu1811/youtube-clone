@@ -78,7 +78,7 @@ const Search = () => {
                 )}
 
                 <button type="submit" className={cx('btn')}>
-                    <SearchIcon width="2.3rem" />
+                    <SearchIcon width="2.4rem" />
                 </button>
             </form>
 

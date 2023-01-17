@@ -13,17 +13,20 @@ const CategorySlider = ({ data, onChangeCategory = () => {} }) => {
     const [showPrev, setShowPrev] = useState(false);
     const [showNext, setShowNext] = useState(true);
 
+    console.log(position);
+    console.log(showPrev);
+
     const handleNext = () => {
-        setPosition((prevState) => prevState - 200);
-        check();
+        setPosition((prevState) => prevState - 100);
+        handleCheck();
     };
 
     const handlePrev = () => {
-        setPosition((prevState) => prevState + 200);
-        check();
+        setPosition((prevState) => prevState + 100);
+        handleCheck();
     };
 
-    const check = () => {
+    const handleCheck = () => {
         if (position > 0) {
             setShowPrev(false);
         } else {
@@ -52,7 +55,7 @@ const CategorySlider = ({ data, onChangeCategory = () => {} }) => {
                         data.map((item, index) => (
                             <div
                                 key={index}
-                                className={cx('item')}
+                                className={cx('item', { active: item.active })}
                                 onClick={(e) => onChangeCategory(e.target.dataset.value)}
                                 data-value={item.value}
                             >

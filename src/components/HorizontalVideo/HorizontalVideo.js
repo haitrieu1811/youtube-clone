@@ -1,22 +1,23 @@
-import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 import Tippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { Link } from 'react-router-dom';
 
-import styles from './HorizontalVideo.module.scss';
+import * as videoService from '~/services/videoService';
+import * as channelService from '~/services/channelService';
 import CircleButton from '../CircleButton';
 import { AddQueueIcon, OptionIcon, TickIcon, WatchLaterIcon } from '../Icons/Icons';
-import Wrapper from '../Popper/Wrapper';
 import Menu from '../Menu';
-import * as videoService from '~/services/videoService';
-import { diffDays } from '~/utils/diffDays';
+import Wrapper from '../Popper/Wrapper';
+import styles from './HorizontalVideo.module.scss';
 
 const cx = classNames.bind(styles);
 
 const HorizontalVideo = ({ data }) => {
-    const [channel, setChannel] = useState({});
+    const [channel, setChannel] = useState();
+    const [statistic, setStatistic] = useState();
+    const [channelStatistic, setChannelStatistic] = useState();
 
     const MENU_DATA = [
         {
@@ -36,14 +37,29 @@ const HorizontalVideo = ({ data }) => {
     // Get channel
     useEffect(() => {
         (async () => {
-            const res = await videoService.channel(data.channelId);
+            const res = await channelService.get(data.channelId);
             setChannel(res);
         })();
     }, [data.channelId]);
 
+    useEffect(() => {
+        (async () => {
+            const statistic = await channelService.statistic(data.channelId);
+            setChannelStatistic(statistic);
+        })();
+    }, [data.channelId]);
+
+    // Get statistic
+    useEffect(() => {
+        (async () => {
+            const statistic = await videoService.statistic(data.videoId);
+            setStatistic(statistic);
+        })();
+    }, [data.videoId]);
+
     return (
         <>
-            {data && channel && (
+            {data && channel && statistic && channelStatistic && (
                 <div className={cx('wrapper')}>
                     <Link to={`/watch/${data.videoId}`} className={cx('thumbnail-wp')}>
                         <div className={cx('actions')}>
@@ -60,18 +76,18 @@ const HorizontalVideo = ({ data }) => {
                     <Link to={`/watch/${data.videoId}`} className={cx('info')}>
                         <h3 className={cx('title')}>{data.title}</h3>
                         <div className={cx('config')}>
-                            <div className={cx('config-value')}>28K lượt xem</div>
+                            <div className={cx('config-value')}>{statistic.views} lượt xem</div>
                             <div className={cx('config-separate')}></div>
-                            <div className={cx('config-value')}>
-                                {diffDays(data.publishAt, moment(new Date()).format('MM/DD/YYYY'))} days ago
-                            </div>
+                            <div className={cx('config-value')}>{data.publishSince}</div>
                         </div>
                         <div className={cx('channel')}>
                             <img className={cx('channel-thumbnail')} src={channel.thumbnail} alt={channel.title} />
                             <span className={cx('channel-name')}>{channel.title}</span>
-                            <span className={cx('channel-tick')}>
-                                <TickIcon width="1.4rem" height="1.4rem" />
-                            </span>
+                            {channelStatistic.subscriberCount > 100000 && (
+                                <span className={cx('channel-tick')}>
+                                    <TickIcon width="1.4rem" height="1.4rem" />
+                                </span>
+                            )}
                         </div>
                         <div className={cx('description')}>{data.description}</div>
                         <span className={cx('new')}>New</span>

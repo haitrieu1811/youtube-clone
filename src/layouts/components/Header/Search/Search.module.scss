@@ -56,8 +56,11 @@
     border-left: 1px solid var(--border-color);
     background-color: var(--grey-1-color);
     color: #d3d3d3;
-    width: 64px;
+    width: 62px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit;
 

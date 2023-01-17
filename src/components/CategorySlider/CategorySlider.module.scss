@@ -1,5 +1,4 @@
 .wrapper {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +11,6 @@
 
 .list-wp {
     flex: 1;
-    max-width: 1200px;
     overflow-x: hidden;
 }
 
@@ -47,10 +45,17 @@
     }
 }
 
+.prev,
+.next {
+    width: 4%;
+    display: flex;
+    align-items: center;
+}
+
 .prev {
-    margin-right: 10px;
+    justify-content: flex-start;
 }
 
 .next {
-    margin-left: 10px;
+    justify-content: flex-end;
 }

@@ -1,4 +1,4 @@
-export const diffDays = (dateString1, dateString2) => {
+const diffDays = (dateString1, dateString2) => {
     const date1 = new Date(dateString1);
     const date2 = new Date(dateString2);
     const diffTime = Math.abs(date2 - date1);
@@ -6,3 +6,5 @@ export const diffDays = (dateString1, dateString2) => {
 
     return diffDays;
 };
+
+export default diffDays;

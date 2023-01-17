@@ -17,6 +17,7 @@ const Home = () => {
     useEffect(() => {
         (async () => {
             setIsLoading(true);
+
             const res = await videoService.list(query, 48);
 
             setVideos(res);

@@ -1,15 +1,17 @@
-import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
-import { useState, useEffect, useRef, useCallback, Fragment } from 'react';
+import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from './Comment.module.scss';
+import { Link } from 'react-router-dom';
+import * as commentService from '~/services/commentService';
+import * as videoService from '~/services/videoService';
+import numberWithSeparate from '~/utils/numberWithSeparate';
+import Button from '../Button';
+import CommentItem from '../CommentItem';
 import { EmojiIcon, SortIcon } from '../Icons/Icons';
 import Wrapper from '../Popper/Wrapper';
-import Button from '../Button';
-import { Link } from 'react-router-dom';
-import CommentItem from '../CommentItem';
-import * as commentService from '~/services/commentService';
+import styles from './Comment.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ const Comment = ({ videoId }) => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentQuantity, setCommentQuantity] = useState(5);
+    const [statistic, setStatistic] = useState();
 
     const observer = useRef();
     const lastBookElementRef = useCallback((node) => {
@@ -72,69 +75,80 @@ const Comment = ({ videoId }) => {
         })();
     }, [videoId, commentQuantity]);
 
+    useEffect(() => {
+        (async () => {
+            const statistic = await videoService.statistic(videoId);
+            setStatistic(statistic);
+        })();
+    }, [videoId]);
+
     return (
-        <div className={cx('wrapper')}>
-            <div className={cx('heading')}>
-                <div className={cx('quantity')}>28 Comments</div>
-                <Tippy interactive trigger="click" render={handleRenderSort} placement="bottom-start">
-                    <div className={cx('sort')}>
-                        <SortIcon width="2.4rem" height="2.4rem" />
-                        <span>Sort by</span>
+        <>
+            {statistic && (
+                <div className={cx('wrapper')}>
+                    <div className={cx('heading')}>
+                        <div className={cx('quantity')}>{numberWithSeparate(statistic.exactlyComments)} Comments</div>
+                        <Tippy interactive trigger="click" render={handleRenderSort} placement="bottom-start">
+                            <div className={cx('sort')}>
+                                <SortIcon width="2.4rem" height="2.4rem" />
+                                <span>Sort by</span>
+                            </div>
+                        </Tippy>
                     </div>
-                </Tippy>
-            </div>
-            <div className={cx('form')}>
-                <img
-                    className={cx('user')}
-                    src="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
-                    alt=""
-                />
-                <div className={cx('input-wp')}>
-                    <input
-                        placeholder="Add a comment..."
-                        className={cx('input')}
-                        onFocus={() => setCmtFocus(true)}
-                        onInput={(e) => handleChangeButtonStatus(e)}
-                        onChange={(e) => setCmtValue(e.target.value)}
-                        value={cmtValue}
-                    />
-                    {cmtFocus && (
-                        <div className={cx('actions')}>
-                            <div className={cx('action-emoji')}>
-                                <span className={cx('emoji-icon')}>
-                                    <EmojiIcon width="2.4rem" height="2.4rem" />
-                                </span>
-                                <p>
-                                    By completing this action you are creating a <Link to="/">channel</Link> and agree
-                                    to
-                                    <Link>YouTube's Terms of Service​.</Link>
-                                </p>
-                            </div>
-                            <div className={cx('action-buttons')}>
-                                <Button name="Cancel" pill transparent onClick={handleCancelComment} />
-                                <Button name="Comment" pill disabled={isDisabled} primary={isPrimary} />
-                            </div>
+                    <div className={cx('form')}>
+                        <img
+                            className={cx('user')}
+                            src="https://fullstack.edu.vn/static/media/f8-icon.18cd71cfcfa33566a22b.png"
+                            alt=""
+                        />
+                        <div className={cx('input-wp')}>
+                            <input
+                                placeholder="Add a comment..."
+                                className={cx('input')}
+                                onFocus={() => setCmtFocus(true)}
+                                onInput={(e) => handleChangeButtonStatus(e)}
+                                onChange={(e) => setCmtValue(e.target.value)}
+                                value={cmtValue}
+                            />
+                            {cmtFocus && (
+                                <div className={cx('actions')}>
+                                    <div className={cx('action-emoji')}>
+                                        <span className={cx('emoji-icon')}>
+                                            <EmojiIcon width="2.4rem" height="2.4rem" />
+                                        </span>
+                                        <p>
+                                            By completing this action you are creating a <Link to="/">channel</Link> and
+                                            agree to
+                                            <Link>YouTube's Terms of Service​.</Link>
+                                        </p>
+                                    </div>
+                                    <div className={cx('action-buttons')}>
+                                        <Button name="Cancel" pill transparent onClick={handleCancelComment} />
+                                        <Button name="Comment" pill disabled={isDisabled} primary={isPrimary} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {comments && comments.length > 0 && (
+                        <div className={cx('list')}>
+                            {comments.map((comment, index) => {
+                                if (comments.length === index + 1) {
+                                    return (
+                                        <div ref={lastBookElementRef} key={index}>
+                                            <CommentItem data={comment} />
+                                        </div>
+                                    );
+                                } else {
+                                    return <CommentItem key={index} data={comment} />;
+                                }
+                            })}
                         </div>
                     )}
                 </div>
-            </div>
-
-            {comments && comments.length > 0 && (
-                <div className={cx('list')}>
-                    {comments.map((comment, index) => {
-                        if (comments.length === index + 1) {
-                            return (
-                                <div ref={lastBookElementRef} key={index}>
-                                    <CommentItem data={comment} />
-                                </div>
-                            );
-                        } else {
-                            return <CommentItem key={index} data={comment} />;
-                        }
-                    })}
-                </div>
             )}
-        </div>
+        </>
     );
 };
 
