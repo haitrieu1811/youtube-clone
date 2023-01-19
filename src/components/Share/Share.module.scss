@@ -2,13 +2,69 @@
     padding: 0 24px 24px;
 }
 
+.socials-wp {
+    position: relative;
+    margin-bottom: 34px;
+}
+
 .socials {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.social {
+    text-align: center;
+
+    + .social {
+        margin-left: 18px;
+    }
+}
+
+.icon {
+    flex-shrink: 0;
+}
+
+.label {
+    font-size: 1.2rem;
+    color: var(--black-color);
+}
+
+.btn {
+    --size: 40px;
+    position: absolute;
+    top: 8px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: var(--white-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    path {
+        fill: var(--black-color);
+    }
+}
+
+.prev {
+    left: -14px;
+}
+
+.next {
+    right: -14px;
 }
 
 .path {
     background-color: #f9f9f9;
     border: 1px solid var(--border-color);
-    padding: 12px 12px 12px 18px;
+    padding: 8px 8px 8px 18px;
     border-radius: 12px;
     display: flex;
     justify-content: space-between;
@@ -33,4 +89,31 @@
         cursor: pointer;
         background-color: #0556c0;
     }
+}
+
+.start-at {
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.start-at-check {
+    --size: 20px;
+    width: var(--size);
+    height: var(--size);
+}
+
+.start-at-label {
+    color: var(--black-color);
+    font-size: 1.4rem;
+    margin-left: 16px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.start-at-time {
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0.1);
 }

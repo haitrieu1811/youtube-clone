@@ -10,9 +10,9 @@ export const get = async (channelId) => {
             id: channelId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
             // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
             // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
-            key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
+            // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
     });
 
@@ -36,9 +36,9 @@ export const statistic = async (channelId) => {
             id: channelId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
             // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
             // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
-            key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
+            // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
     });
 

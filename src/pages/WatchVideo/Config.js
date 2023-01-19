@@ -115,7 +115,7 @@ const Config = ({ setShowModal }) => {
 
                                 <div className={cx('channel-subscribers')}>
                                     {!channelStatistic.hiddenSubscriberCount
-                                        ? intToString(channelStatistic.subscriberCount) + 'subscribers'
+                                        ? intToString(channelStatistic.subscriberCount) + ' subscribers'
                                         : ''}
                                 </div>
                             </div>

@@ -19,6 +19,7 @@ const VerticalVideo = ({ data }) => {
     const [channel, setChannel] = useState();
     const [statistic, setStatistic] = useState();
     const [channelStatistic, setChannelStatistic] = useState();
+    const [contentDetail, setContentDetail] = useState();
 
     const MENU_DATA = [
         {
@@ -49,35 +50,46 @@ const VerticalVideo = ({ data }) => {
         );
     };
 
+    // Get data channel
     useEffect(() => {
         (async () => {
-            const channel = await channelService.get(data.channelId);
-            setChannel(channel);
+            const res = await channelService.get(data.channelId);
+            setChannel(res);
         })();
     }, [data.channelId]);
 
+    // Get statistic video
     useEffect(() => {
         (async () => {
-            const statistic = await videoService.statistic(data.videoId);
-            setStatistic(statistic);
+            const res = await videoService.statistic(data.videoId);
+            setStatistic(res);
         })();
     }, [data.videoId]);
 
+    // Get statistic channel
     useEffect(() => {
         (async () => {
-            const statistic = await channelService.statistic(data.channelId);
-            setChannelStatistic(statistic);
+            const res = await channelService.statistic(data.channelId);
+            setChannelStatistic(res);
         })();
     }, [data.channelId]);
 
+    // Get content detail
+    useEffect(() => {
+        (async () => {
+            const res = await videoService.contentDetail(data.videoId);
+            setContentDetail(res);
+        })();
+    }, [data.videoId]);
+
     return (
         <>
-            {statistic && channelStatistic && (
+            {statistic && channelStatistic && contentDetail && (
                 <div className={cx('wrapper')}>
                     <div className={cx('main')}>
                         <Link to={`/watch/${data.videoId}`} className={cx('head')}>
                             <img src={data.thumbnail} className={cx('thumbnail')} alt={data.title} />
-                            <span className={cx('time')}>{data.time}</span>
+                            <span className={cx('duration')}>{contentDetail.convertDuration}</span>
                             <span className={cx('keep-hover')}>Keep hovering to play</span>
                         </Link>
                         <div className={cx('body')}>
