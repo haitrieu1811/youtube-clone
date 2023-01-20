@@ -17,27 +17,17 @@ const CategorySlider = ({ data, onChangeCategory = () => {} }) => {
     console.log(showPrev);
 
     const handleNext = () => {
-        setPosition((prevState) => prevState - 100);
-        handleCheck();
+        const newPosition = position - 100;
+        setPosition(newPosition);
+        if (newPosition < 0) setShowPrev(true);
+        if (newPosition <= -400) setShowNext(false);
     };
 
     const handlePrev = () => {
-        setPosition((prevState) => prevState + 100);
-        handleCheck();
-    };
-
-    const handleCheck = () => {
-        if (position > 0) {
-            setShowPrev(false);
-        } else {
-            setShowPrev(true);
-        }
-
-        if (position < -1200) {
-            setShowNext(false);
-        } else {
-            setShowNext(true);
-        }
+        const newPosition = position + 100;
+        setPosition(newPosition);
+        if (newPosition >= 0) setShowPrev(false);
+        if (newPosition > -400) setShowNext(true);
     };
 
     return (

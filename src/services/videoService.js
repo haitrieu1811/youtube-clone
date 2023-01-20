@@ -1,5 +1,5 @@
 import axios from 'axios';
-import moment, { duration } from 'moment';
+import moment from 'moment';
 import intToString from '~/utils/intToString';
 import timeSince from '~/utils/timeSince';
 import convertDuration from '~/utils/convertDuration';
@@ -13,7 +13,7 @@ export const list = async (q, maxResults) => {
             maxResults: maxResults,
             q: q,
             type: 'video',
-            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
+             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
             // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
             key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
             // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
@@ -46,12 +46,12 @@ export const list = async (q, maxResults) => {
     return dataVideos;
 };
 
-export const detail = async (videoId) => {
+export const get = async (videoId) => {
     const res = await axios({
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/videos',
         params: {
-            part: 'snippet',
+            part: 'snippet,statistics,contentDetails',
             id: videoId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
             // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
@@ -63,77 +63,36 @@ export const detail = async (videoId) => {
 
     const data = res.data.items[0];
 
-    const videoData = {};
-    videoData.title = data.snippet.title;
-    videoData.description = data.snippet.description;
-    videoData.channelId = data.snippet.channelId;
-    videoData.publishAt = moment(data.snippet.publishedAt).format('MM/DD/YYYY');
-    videoData.publishSince = timeSince(new Date(videoData.publishAt)) + ' ago';
+    console.log('>>> Check data video: ', data);
 
-    console.log('>>> Data video: ', data);
-
-    return videoData;
-};
-
-export const statistic = async (videoId) => {
-    const res = await axios({
-        method: 'GET',
-        url: 'https://www.googleapis.com/youtube/v3/videos',
-        params: {
-            part: 'statistics',
-            id: videoId,
-            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
-            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
-            // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
-        },
-    });
-
-    const data = res.data.items[0].statistics;
+    const snippet = data.snippet;
+    const statistics = data.statistics;
+    const contentDetails = data.contentDetails;
 
     const result = {};
 
-    result.views = intToString(data.viewCount);
-    result.exactlyViews = data.viewCount;
-    result.likes = intToString(data.likeCount);
-    result.comments = intToString(data.commentCount);
-    result.exactlyComments = data.commentCount;
-    result.favorites = intToString(data.favoriteCount);
+    result.title = snippet.title;
+    result.description = snippet.description;
+    result.channelId = snippet.channelId;
+    result.channelTitle = snippet.channelTitle;
+    result.publishAt = moment(snippet.publishedAt).format('MM/DD/YYYY');
+    result.publishSince = timeSince(new Date(result.publishAt)) + ' ago';
+    result.tags = snippet.tags;
 
-    return result;
-};
+    result.views = intToString(statistics.viewCount);
+    result.exactlyViews = statistics.viewCount;
+    result.likes = intToString(statistics.likeCount);
+    result.comments = intToString(statistics.commentCount);
+    result.exactlyComments = statistics.commentCount;
+    result.favorites = intToString(statistics.favoriteCount);
 
-export const contentDetail = async (videoId) => {
-    const res = await axios({
-        method: 'GET',
-        url: 'https://www.googleapis.com/youtube/v3/videos',
-        params: {
-            part: 'contentDetails',
-            id: videoId,
-            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
-            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
-            // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
-        },
-    });
+    result.duration = contentDetails.duration;
+    result.convertDuration = convertDuration(contentDetails.duration);
+    result.dimension = contentDetails.dimension;
+    result.definition = contentDetails.definition;
+    result.caption = contentDetails.caption;
 
-    const data = res.data.items[0].contentDetails;
-
-    const result = {};
-    const hours = moment.duration(data.duration).asHours();
-    const minutes = moment.duration(data.duration).asMinutes();
-    const seconds = moment.duration(data.duration).asSeconds();
-    const convertDuration = hours + ':' + minutes + ':' + seconds;
-
-    result.duration = data.duration;
-    result.convertDuration = convertDuration;
-    result.dimension = data.dimension;
-    result.definition = data.definition;
-    result.caption = data.caption;
-
-    console.log('>>> Content detail: ', result);
+    console.log('>>> Data video: ', result);
 
     return result;
 };

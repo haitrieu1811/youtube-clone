@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 
 import {
     EmailIcon,
@@ -16,6 +17,10 @@ import styles from './Share.module.scss';
 const cx = classNames.bind(styles);
 
 const Share = () => {
+    const [position, setPosition] = useState(0);
+    const [showPrev, setShowPrev] = useState(false);
+    const [showNext, setShowNext] = useState(true);
+
     const SOCIALS = [
         {
             icon: <EmbedIcon width="6rem" height="6rem" />,
@@ -45,29 +50,53 @@ const Share = () => {
             icon: <RedditIcon width="6rem" height="6rem" />,
             label: 'Reddit',
         },
+        {
+            icon: <TwitterIcon width="6rem" height="6rem" />,
+            label: 'Twitter',
+        },
     ];
+
+    const handleSocialsNext = () => {
+        const newPosition = position - 200;
+        setPosition(newPosition);
+        if (newPosition < 0) setShowPrev(true);
+        if (newPosition <= -400) setShowNext(false);
+    };
+
+    const handleSocialsPrev = () => {
+        const newPosition = position + 200;
+        setPosition(newPosition);
+        if (newPosition >= 0) setShowPrev(false);
+        else if (newPosition > -400) setShowNext(true);
+    };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('socials-wp')}>
-                <button type="button" className={cx('btn', 'prev')}>
-                    <PrevIcon width="2.6rem" height="2.6rem" />
-                </button>
+                {showPrev && (
+                    <button type="button" className={cx('btn', 'prev')} onClick={handleSocialsPrev}>
+                        <PrevIcon width="2.6rem" height="2.6rem" />
+                    </button>
+                )}
 
                 {SOCIALS && SOCIALS.length > 0 && (
-                    <div className={cx('socials')}>
-                        {SOCIALS.map((social, index) => (
-                            <div key={index} className={cx('social')}>
-                                <div className={cx('icon')}>{social.icon}</div>
-                                <div className={cx('label')}>{social.label}</div>
-                            </div>
-                        ))}
+                    <div className={cx('socials-container')}>
+                        <div className={cx('socials')} style={{ transform: `translateX(${position}px)` }}>
+                            {SOCIALS.map((social, index) => (
+                                <div key={index} className={cx('social')}>
+                                    <div className={cx('icon')}>{social.icon}</div>
+                                    <div className={cx('label')}>{social.label}</div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
 
-                <button type="button" className={cx('btn', 'next')}>
-                    <NextIcon width="2.6rem" height="2.6rem" />
-                </button>
+                {showNext && (
+                    <button type="button" className={cx('btn', 'next')} onClick={handleSocialsNext}>
+                        <NextIcon width="2.6rem" height="2.6rem" />
+                    </button>
+                )}
             </div>
 
             <div className={cx('path')}>

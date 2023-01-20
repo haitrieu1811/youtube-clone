@@ -28,21 +28,12 @@ const Config = ({ setShowModal }) => {
 
     const [video, setVideo] = useState();
     const [channel, setChannel] = useState();
-    const [statistic, setStatistic] = useState();
-    const [channelStatistic, setChannelStatistic] = useState();
 
     // Video
     useEffect(() => {
         (async () => {
-            const res = await videoService.detail(videoId);
+            const res = await videoService.get(videoId);
             setVideo(res);
-        })();
-    }, [videoId]);
-
-    useEffect(() => {
-        (async () => {
-            const statistic = await videoService.statistic(videoId);
-            setStatistic(statistic);
         })();
     }, [videoId]);
 
@@ -52,15 +43,6 @@ const Config = ({ setShowModal }) => {
             if (video) {
                 const res = await channelService.get(video.channelId);
                 setChannel(res);
-            }
-        })();
-    }, [video]);
-
-    useEffect(() => {
-        (async () => {
-            if (video) {
-                const statistic = await channelService.statistic(video.channelId);
-                setChannelStatistic(statistic);
             }
         })();
     }, [video]);
@@ -94,7 +76,7 @@ const Config = ({ setShowModal }) => {
 
     return (
         <>
-            {video && channel && channelStatistic && statistic && (
+            {video && channel && (
                 <>
                     <h2 className={cx('title')}>{video.title}</h2>
                     <div className={cx('config')}>
@@ -107,15 +89,15 @@ const Config = ({ setShowModal }) => {
                                 <Link>
                                     <h3 className={cx('channel-name')}>
                                         {channel.title}
-                                        {channelStatistic.subscriberCount > 100000 && (
+                                        {channel.subscriberCount > 100000 && (
                                             <TickIcon width="1.5rem" height="1.5rem" />
                                         )}
                                     </h3>
                                 </Link>
 
                                 <div className={cx('channel-subscribers')}>
-                                    {!channelStatistic.hiddenSubscriberCount
-                                        ? intToString(channelStatistic.subscriberCount) + ' subscribers'
+                                    {!channel.hiddenSubscriberCount
+                                        ? intToString(channel.subscriberCount) + ' subscribers'
                                         : ''}
                                 </div>
                             </div>
@@ -129,12 +111,12 @@ const Config = ({ setShowModal }) => {
                             <div className={cx('like-dislike')}>
                                 <div className={cx('like-dislike-btn')}>
                                     <LikeIcon width="2.4rem" height="2.4rem" />
-                                    <span className={cx('like-dislike-count')}>{statistic.likes}</span>
+                                    <span className={cx('like-dislike-count')}>{video.likes}</span>
                                 </div>
                                 <div className={cx('like-dislike-separate')}></div>
                                 <div className={cx('like-dislike-btn')}>
                                     <DislikeIcon width="2.4rem" height="2.4rem" />
-                                    <span className={cx('like-dislike-count')}>{statistic.favorites}</span>
+                                    <span className={cx('like-dislike-count')}>{video.favorites}</span>
                                 </div>
                             </div>
                             <div className={cx('share')} onClick={handleModal}>

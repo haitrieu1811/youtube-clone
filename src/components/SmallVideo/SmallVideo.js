@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import * as videoService from '~/services/videoService';
 import * as channelService from '~/services/channelService';
-import { AddQueueIcon, DownloadIcon, OptionIcon, ShareIcon, TickIcon, WatchLaterIcon } from '../Icons/Icons';
+import { AddQueueIcon, DownloadIcon, OptionIcon, ShareIcon, TickIcon, WatchLaterIcon, LiveIcon } from '../Icons/Icons';
 import Menu from '../Menu';
 import Wrapper from '../Popper/Wrapper';
 import styles from './SmallVideo.module.scss';
@@ -14,9 +14,8 @@ import styles from './SmallVideo.module.scss';
 const cx = classNames.bind(styles);
 
 const SmallVideo = ({ data }) => {
-    const [channel, setChannel] = useState({});
-    const [statistic, setStatistic] = useState();
-    const [channelStatistic, setChannelStatistic] = useState();
+    const [video, setVideo] = useState();
+    const [channel, setChannel] = useState();
 
     const MENU_DATA = [
         {
@@ -55,17 +54,11 @@ const SmallVideo = ({ data }) => {
         })();
     }, [data.channelId]);
 
+    // Video
     useEffect(() => {
         (async () => {
-            const statistic = await channelService.statistic(data.channelId);
-            setChannelStatistic(statistic);
-        })();
-    }, [data.channelId]);
-
-    useEffect(() => {
-        (async () => {
-            const statistic = await videoService.statistic(data.videoId);
-            setStatistic(statistic);
+            const res = await videoService.get(data.videoId);
+            setVideo(res);
         })();
     }, [data.videoId]);
 
@@ -75,7 +68,7 @@ const SmallVideo = ({ data }) => {
 
     return (
         <>
-            {statistic && channelStatistic && channel && (
+            {video && channel && (
                 <div className={cx('wrapper')} onClick={handleScrollToTop}>
                     <Link to={`/watch/${data.videoId}`} className={cx('thumbnail-wp')}>
                         <div className={cx('actions')}>
@@ -89,7 +82,9 @@ const SmallVideo = ({ data }) => {
 
                         <img src={data.thumbnail} alt="" className={cx('thumbnail')} />
 
-                        <span className={cx('time')}>36:21</span>
+                        {video.convertDuration !== '0:00' && (
+                            <span className={cx('duration')}>{video.convertDuration}</span>
+                        )}
                     </Link>
 
                     <Link to={`/watch/${data.videoId}`} className={cx('info')}>
@@ -101,10 +96,18 @@ const SmallVideo = ({ data }) => {
                             </span>
                         </div>
                         <div className={cx('config')}>
-                            <span>{statistic.views} views</span>
+                            <span>{video.views} views</span>
                             <span className={cx('config-separate')}></span>
                             <span>{data.publishSince}</span>
                         </div>
+                        {video.convertDuration === '0:00' && (
+                            <span className={cx('live')}>
+                                <span className={cx('live-icon')}>
+                                    <LiveIcon width="1.4rem" height="1.4rem" />
+                                </span>
+                                <span className={cx('live-text')}>LIVE</span>
+                            </span>
+                        )}
                     </Link>
 
                     <Tippy interactive placement="bottom-end" trigger="click" render={handleRenderOptions}>

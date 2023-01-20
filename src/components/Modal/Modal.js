@@ -15,15 +15,12 @@ const Modal = ({
     show = false,
 
     // Size
-    extraSmall = false,
-    small = false,
-    medium = false,
-    large = false,
-    extraLarge = false,
+    width = 492,
 
     // Position
     top = false,
     bottom = false,
+    center = false,
 
     // Handle
     handleClose,
@@ -36,14 +33,10 @@ const Modal = ({
         // Action
         show,
 
-        // Size
-        extraSmall,
-        small,
-        medium,
-        large,
-        extraLarge,
+        // Position
         top,
         bottom,
+        center,
     });
 
     const handleCloseModal = () => {
@@ -55,7 +48,7 @@ const Modal = ({
             <div ref={container} className={classes}>
                 <div className={cx('mask')} onClick={handleCloseModal}></div>
 
-                <div ref={main} className={cx('main')}>
+                <div ref={main} className={cx('main')} style={{ width: width }}>
                     <div className={cx('head')}>
                         {title ? <h2 className={cx('title')}>{title}</h2> : <div></div>}
                         <span className={cx('close')} onClick={handleCloseModal}>

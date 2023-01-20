@@ -22,7 +22,7 @@ const Comment = ({ videoId }) => {
     const [isDisabled, setIsDisabled] = useState(true);
     const [comments, setComments] = useState([]);
     const [commentQuantity, setCommentQuantity] = useState(5);
-    const [statistic, setStatistic] = useState();
+    const [video, setVideo] = useState();
 
     const observer = useRef();
     const lastBookElementRef = useCallback((node) => {
@@ -77,17 +77,17 @@ const Comment = ({ videoId }) => {
 
     useEffect(() => {
         (async () => {
-            const statistic = await videoService.statistic(videoId);
-            setStatistic(statistic);
+            const res = await videoService.get(videoId);
+            setVideo(res);
         })();
     }, [videoId]);
 
     return (
         <>
-            {statistic && (
+            {video && (
                 <div className={cx('wrapper')}>
                     <div className={cx('heading')}>
-                        <div className={cx('quantity')}>{numberWithSeparate(statistic.exactlyComments)} Comments</div>
+                        <div className={cx('quantity')}>{numberWithSeparate(video.exactlyComments)} Comments</div>
                         <Tippy interactive trigger="click" render={handleRenderSort} placement="bottom-start">
                             <div className={cx('sort')}>
                                 <SortIcon width="2.4rem" height="2.4rem" />

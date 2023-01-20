@@ -5,7 +5,7 @@ export const get = async (channelId) => {
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/channels',
         params: {
-            part: 'snippet',
+            part: 'snippet,statistics',
             maxResults: 1,
             id: channelId,
             // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
@@ -17,14 +17,20 @@ export const get = async (channelId) => {
     });
 
     const data = res.data.items[0];
+    const snippet = data.snippet;
+    const statistics = data.statistics;
 
-    console.log('>>> Data channel: ', data);
+    const result = {};
 
-    const dataChannel = {};
-    dataChannel.thumbnail = data.snippet.thumbnails.default.url;
-    dataChannel.title = data.snippet.title;
+    result.thumbnail = snippet.thumbnails.default.url;
+    result.title = snippet.title;
 
-    return dataChannel;
+    result.hiddenSubscriberCount = statistics.hiddenSubscriberCount;
+    result.subscriberCount = statistics.subscriberCount;
+    result.videoCount = statistics.videoCount;
+    result.viewCount = statistics.viewCount;
+
+    return result;
 };
 
 export const statistic = async (channelId) => {

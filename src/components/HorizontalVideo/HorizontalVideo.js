@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import * as videoService from '~/services/videoService';
 import * as channelService from '~/services/channelService';
 import CircleButton from '../CircleButton';
-import { AddQueueIcon, OptionIcon, TickIcon, WatchLaterIcon } from '../Icons/Icons';
+import { AddQueueIcon, OptionIcon, TickIcon, WatchLaterIcon, LiveIcon } from '../Icons/Icons';
 import Menu from '../Menu';
 import Wrapper from '../Popper/Wrapper';
 import styles from './HorizontalVideo.module.scss';
@@ -16,8 +16,7 @@ const cx = classNames.bind(styles);
 
 const HorizontalVideo = ({ data }) => {
     const [channel, setChannel] = useState();
-    const [statistic, setStatistic] = useState();
-    const [channelStatistic, setChannelStatistic] = useState();
+    const [video, setVideo] = useState();
 
     const MENU_DATA = [
         {
@@ -42,24 +41,17 @@ const HorizontalVideo = ({ data }) => {
         })();
     }, [data.channelId]);
 
+    // Get video
     useEffect(() => {
         (async () => {
-            const statistic = await channelService.statistic(data.channelId);
-            setChannelStatistic(statistic);
-        })();
-    }, [data.channelId]);
-
-    // Get statistic
-    useEffect(() => {
-        (async () => {
-            const statistic = await videoService.statistic(data.videoId);
-            setStatistic(statistic);
+            const res = await videoService.get(data.videoId);
+            setVideo(res);
         })();
     }, [data.videoId]);
 
     return (
         <>
-            {data && channel && statistic && channelStatistic && (
+            {data && channel && video && (
                 <div className={cx('wrapper')}>
                     <Link to={`/watch/${data.videoId}`} className={cx('thumbnail-wp')}>
                         <div className={cx('actions')}>
@@ -71,27 +63,38 @@ const HorizontalVideo = ({ data }) => {
                             </div>
                         </div>
                         <img className={cx('thumbnail')} src={data.thumbnail} alt={data.title} />
-                        <span className={cx('time')}>19:41</span>
+                        {video.convertDuration !== '0:00' && (
+                            <span className={cx('duration')}>{video.convertDuration}</span>
+                        )}
                     </Link>
+
                     <Link to={`/watch/${data.videoId}`} className={cx('info')}>
                         <h3 className={cx('title')}>{data.title}</h3>
                         <div className={cx('config')}>
-                            <div className={cx('config-value')}>{statistic.views} lượt xem</div>
+                            <div className={cx('config-value')}>{video.views} lượt xem</div>
                             <div className={cx('config-separate')}></div>
                             <div className={cx('config-value')}>{data.publishSince}</div>
                         </div>
                         <div className={cx('channel')}>
                             <img className={cx('channel-thumbnail')} src={channel.thumbnail} alt={channel.title} />
                             <span className={cx('channel-name')}>{channel.title}</span>
-                            {channelStatistic.subscriberCount > 100000 && (
+                            {channel.subscriberCount > 100000 && (
                                 <span className={cx('channel-tick')}>
                                     <TickIcon width="1.4rem" height="1.4rem" />
                                 </span>
                             )}
                         </div>
                         <div className={cx('description')}>{data.description}</div>
-                        <span className={cx('new')}>New</span>
+                        {video.convertDuration === '0:00' && (
+                            <span className={cx('live')}>
+                                <span className={cx('live-icon')}>
+                                    <LiveIcon width="1.8rem" height="1.8rem" />
+                                </span>
+                                <span className={cx('live-text')}>LIVE</span>
+                            </span>
+                        )}
                     </Link>
+
                     <Tippy interactive placement="bottom-end" trigger="click" render={handleRenderOptions}>
                         <span className={cx('options')}>
                             <CircleButton icon={<OptionIcon width="2.4rem" height="2.4rem" />} />

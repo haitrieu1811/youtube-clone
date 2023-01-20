@@ -4,7 +4,7 @@ import PropTyes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { DownloadIcon } from '~/components/Icons/Icons';
+import { DownloadIcon, LiveIcon } from '~/components/Icons/Icons';
 import * as videoService from '~/services/videoService';
 import * as channelService from '~/services/channelService';
 import CircleButton from '../CircleButton';
@@ -16,10 +16,8 @@ import styles from './VerticalVideo.module.scss';
 const cx = classNames.bind(styles);
 
 const VerticalVideo = ({ data }) => {
+    const [video, setVideo] = useState();
     const [channel, setChannel] = useState();
-    const [statistic, setStatistic] = useState();
-    const [channelStatistic, setChannelStatistic] = useState();
-    const [contentDetail, setContentDetail] = useState();
 
     const MENU_DATA = [
         {
@@ -50,7 +48,7 @@ const VerticalVideo = ({ data }) => {
         );
     };
 
-    // Get data channel
+    // Get channel
     useEffect(() => {
         (async () => {
             const res = await channelService.get(data.channelId);
@@ -58,62 +56,58 @@ const VerticalVideo = ({ data }) => {
         })();
     }, [data.channelId]);
 
-    // Get statistic video
+    // Get video
     useEffect(() => {
         (async () => {
-            const res = await videoService.statistic(data.videoId);
-            setStatistic(res);
-        })();
-    }, [data.videoId]);
-
-    // Get statistic channel
-    useEffect(() => {
-        (async () => {
-            const res = await channelService.statistic(data.channelId);
-            setChannelStatistic(res);
-        })();
-    }, [data.channelId]);
-
-    // Get content detail
-    useEffect(() => {
-        (async () => {
-            const res = await videoService.contentDetail(data.videoId);
-            setContentDetail(res);
+            const res = await videoService.get(data.videoId);
+            setVideo(res);
         })();
     }, [data.videoId]);
 
     return (
         <>
-            {statistic && channelStatistic && contentDetail && (
+            {video && channel && (
                 <div className={cx('wrapper')}>
                     <div className={cx('main')}>
                         <Link to={`/watch/${data.videoId}`} className={cx('head')}>
                             <img src={data.thumbnail} className={cx('thumbnail')} alt={data.title} />
-                            <span className={cx('duration')}>{contentDetail.convertDuration}</span>
+                            {video.convertDuration !== '0:00' && (
+                                <span className={cx('duration')}>{video.convertDuration}</span>
+                            )}
                             <span className={cx('keep-hover')}>Keep hovering to play</span>
                         </Link>
+
                         <div className={cx('body')}>
-                            {channel && (
-                                <img src={channel.thumbnail} className={cx('channel-thumb')} alt={channel.title} />
-                            )}
+                            <img src={channel.thumbnail} className={cx('channel-thumb')} alt={channel.title} />
 
                             <Link to={`/watch/${data.videoId}`} className={cx('info')}>
                                 <h3 className={cx('title')} title={data.title}>
                                     {data.title}
                                 </h3>
+
                                 <div className={cx('channel-name')}>
-                                    {channel && channel.title}
-                                    {channelStatistic.subscriberCount > 100000 && (
+                                    {channel.title}
+                                    {channel.subscriberCount > 100000 && (
                                         <span className={cx('tick')}>
                                             <TickIcon width="1.2rem" height="1.2rem" />
                                         </span>
                                     )}
                                 </div>
+
                                 <div className={cx('config')}>
-                                    <span className={cx('view')}>{statistic.views} views</span>
+                                    <span className={cx('view')}>{video.views} views</span>
                                     <span className={cx('separate')}>.</span>
                                     <span className={cx('publish-at')}>{data.publishSince}</span>
                                 </div>
+
+                                {video.convertDuration === '0:00' && (
+                                    <span className={cx('live')}>
+                                        <span className={cx('live-icon')}>
+                                            <LiveIcon width="1.6rem" height="1.6rem" />
+                                        </span>
+                                        <span className={cx('live-text')}>LIVE</span>
+                                    </span>
+                                )}
                             </Link>
 
                             <Tippy

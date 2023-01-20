@@ -86,7 +86,7 @@ const Search = () => {
                 <MicIcon width="2.3rem" />
             </button>
 
-            <Modal content={<VoiceSearch />} top medium show={showModal} handleClose={handleCloseModal} />
+            <Modal width={592} content={<VoiceSearch />} top medium show={showModal} handleClose={handleCloseModal} />
         </div>
     );
 };

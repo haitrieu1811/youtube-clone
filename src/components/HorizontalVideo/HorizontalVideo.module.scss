@@ -54,7 +54,7 @@
     border-radius: 12px;
 }
 
-.time {
+.duration {
     position: absolute;
     bottom: 4px;
     right: 4px;
@@ -145,10 +145,28 @@
     text-overflow: ellipsis;
 }
 
-.new {
-    font-size: 1.2rem;
+.live {
+    background-color: rgba(204, 0, 0, 0.9);
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+}
+
+.live-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 6px;
+
+    path {
+        fill: var(--white-color);
+    }
+}
+
+.live-text {
+    color: var(--white-color);
+    font-size: 1.1rem;
     font-weight: 600;
-    color: #606060;
-    background-color: var(--grey-2-color);
-    padding: 2px 6px;
 }

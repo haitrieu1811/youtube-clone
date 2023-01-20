@@ -12,7 +12,6 @@ const Description = () => {
     const { videoId } = useParams();
 
     const [video, setVideo] = useState();
-    const [statistic, setStatistic] = useState();
 
     const [showMore, setShowMore] = useState(true);
     const [showLess, setShowLess] = useState(false);
@@ -21,15 +20,8 @@ const Description = () => {
     // Video
     useEffect(() => {
         (async () => {
-            const res = await videoService.detail(videoId);
+            const res = await videoService.get(videoId);
             setVideo(res);
-        })();
-    }, [videoId]);
-
-    useEffect(() => {
-        (async () => {
-            const statistic = await videoService.statistic(videoId);
-            setStatistic(statistic);
         })();
     }, [videoId]);
 
@@ -49,10 +41,10 @@ const Description = () => {
 
     return (
         <>
-            {statistic && video && (
+            {video && (
                 <div className={cx('description-wp', { active: descActive })}>
                     <div className={cx('description-config')}>
-                        <strong>{numberWithSeparate(statistic.exactlyViews)} views</strong>
+                        <strong>{numberWithSeparate(video.exactlyViews)} views</strong>
                         <strong>{video.publishSince}</strong>
                     </div>
                     <div className={cx('description')}>
