@@ -6,7 +6,6 @@ import Comment from '~/components/Comment';
 import Modal from '~/components/Modal';
 import Share from '~/components/Share';
 import SmallVideoSkeleton from '~/components/SmallVideoSkeleton';
-import * as channelService from '~/services/channelService';
 import * as videoService from '~/services/videoService';
 import Config from './Config';
 import Description from './Description';
@@ -20,31 +19,22 @@ const VideoDetail = () => {
     const { videoId } = useParams();
 
     const [video, setVideo] = useState();
-    const [statistic, setStatistic] = useState();
-    const [channelStatistic, setChannelStatistic] = useState();
-
+    const [videos, setVideos] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
     // Video
     useEffect(() => {
         (async () => {
-            const res = await videoService.detail(videoId);
+            const res = await videoService.get(videoId);
             setVideo(res);
         })();
     }, [videoId]);
 
     useEffect(() => {
         (async () => {
-            const statistic = await videoService.statistic(videoId);
-            setStatistic(statistic);
-        })();
-    }, [videoId]);
-
-    useEffect(() => {
-        (async () => {
             if (video) {
-                const statistic = await channelService.statistic(video.channelId);
-                setChannelStatistic(statistic);
+                const res = await videoService.list(video.channelTitle, 24);
+                setVideos(res);
             }
         })();
     }, [video]);
@@ -53,20 +43,10 @@ const VideoDetail = () => {
         setShowModal((prevState) => !prevState);
     };
 
-    // Videos
-    const [videos, setVideos] = useState([]);
-
-    useEffect(() => {
-        (async () => {
-            const res = await videoService.list('blv anh quân', 24);
-            setVideos(res);
-        })();
-    }, []);
-
     return (
         <div className={cx('wrapper')}>
             <div className={cx('stage')}>
-                {video && statistic && channelStatistic && (
+                {video && (
                     <>
                         <div className={cx('video')}>
                             <div className={cx('main')}>
@@ -100,7 +80,15 @@ const VideoDetail = () => {
                 </div>
             )}
 
-            <Modal title="Share" show={showModal} handleClose={handleModal} small content={<Share />} />
+            <Modal
+                width={518}
+                title="Share"
+                center
+                show={showModal}
+                handleClose={handleModal}
+                small
+                content={<Share />}
+            />
         </div>
     );
 };
