@@ -86,7 +86,7 @@ const Config = ({ setShowModal }) => {
                             </Link>
 
                             <div className={cx('channel-info')}>
-                                <Link>
+                                <Link to={`/channel/${video.channelId}`}>
                                     <h3 className={cx('channel-name')}>
                                         {channel.title}
                                         {channel.subscriberCount > 100000 && (

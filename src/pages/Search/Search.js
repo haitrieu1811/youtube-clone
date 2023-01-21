@@ -11,8 +11,9 @@ const Video = React.lazy(() => import('~/components/HorizontalVideo'));
 const cx = classNames.bind(styles);
 
 const Search = () => {
-    const [videos, setVideos] = useState([]);
     const { q } = useParams();
+
+    const [videos, setVideos] = useState([]);
 
     useEffect(() => {
         (async () => {

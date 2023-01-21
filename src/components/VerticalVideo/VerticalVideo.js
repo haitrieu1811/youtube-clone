@@ -78,7 +78,9 @@ const VerticalVideo = ({ data }) => {
                         </Link>
 
                         <div className={cx('body')}>
-                            <img src={channel.thumbnail} className={cx('channel-thumb')} alt={channel.title} />
+                            <Link to={`/channel/${data.channelId}`}>
+                                <img src={channel.thumbnail} className={cx('channel-thumb')} alt={channel.title} />
+                            </Link>
 
                             <Link to={`/watch/${data.videoId}`} className={cx('info')}>
                                 <h3 className={cx('title')} title={data.title}>
@@ -87,7 +89,7 @@ const VerticalVideo = ({ data }) => {
 
                                 <div className={cx('channel-name')}>
                                     {channel.title}
-                                    {channel.subscriberCount > 100000 && (
+                                    {channel.tick && (
                                         <span className={cx('tick')}>
                                             <TickIcon width="1.2rem" height="1.2rem" />
                                         </span>

@@ -5,12 +5,12 @@ export const get = async (channelId) => {
         method: 'GET',
         url: 'https://www.googleapis.com/youtube/v3/channels',
         params: {
-            part: 'snippet,statistics',
+            part: 'snippet,statistics,brandingSettings',
             maxResults: 1,
             id: channelId,
-            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
+            key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
             // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
+            // key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
             // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
             // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
         },
@@ -19,42 +19,25 @@ export const get = async (channelId) => {
     const data = res.data.items[0];
     const snippet = data.snippet;
     const statistics = data.statistics;
+    const brandingSettings = data.brandingSettings;
+    // const contentDetails = data.contentDetails;
 
     const result = {};
 
     result.thumbnail = snippet.thumbnails.default.url;
     result.title = snippet.title;
+    result.customUrl = snippet.customUrl;
 
     result.hiddenSubscriberCount = statistics.hiddenSubscriberCount;
     result.subscriberCount = statistics.subscriberCount;
     result.videoCount = statistics.videoCount;
     result.viewCount = statistics.viewCount;
 
-    return result;
-};
+    result.tick = statistics.subscriberCount > 100000 ? true : false;
 
-export const statistic = async (channelId) => {
-    const res = await axios({
-        method: 'GET',
-        url: 'https://www.googleapis.com/youtube/v3/channels',
-        params: {
-            part: 'statistics',
-            id: channelId,
-            // key: 'AIzaSyA7VA0F-Cub1vsxig1eHAwZCL2kuEpJ-og',
-            // key: 'AIzaSyCMylU-9JSqd2vovIC5HRbm_AZyx710WbQ',
-            key: 'AIzaSyCkE39Mg6XPAFYprzto4wo7rjNL9Jxsr5w',
-            // key: 'AIzaSyAWwuKzvNwpe3QEN2nHu2MrTLIQvZqvRkc',
-            // key: 'AIzaSyB-kSJpQ3NugeVslBfmdRq5kJySv4ykPSM',
-        },
-    });
+    result.coverImage = brandingSettings.image.bannerExternalUrl;
 
-    const data = res.data.items[0].statistics;
-
-    const result = {};
-    result.hiddenSubscriberCount = data.hiddenSubscriberCount;
-    result.subscriberCount = data.subscriberCount;
-    result.videoCount = data.videoCount;
-    result.viewCount = data.viewCount;
+    // result.channels = contentDetails.channels;
 
     return result;
 };

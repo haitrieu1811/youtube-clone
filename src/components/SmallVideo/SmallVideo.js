@@ -90,10 +90,12 @@ const SmallVideo = ({ data }) => {
                     <Link to={`/watch/${data.videoId}`} className={cx('info')}>
                         <h3 className={cx('title')}>{data.title}</h3>
                         <div className={cx('channel')}>
-                            {channel.title}
-                            <span className={cx('tick')}>
-                                <TickIcon width="1.2rem" height="1.2rem" />
-                            </span>
+                            <Link to={`/channel/${data.channelId}`}>{channel.title}</Link>
+                            {channel.tick && (
+                                <span className={cx('tick')}>
+                                    <TickIcon width="1.2rem" height="1.2rem" />
+                                </span>
+                            )}
                         </div>
                         <div className={cx('config')}>
                             <span>{video.views} views</span>

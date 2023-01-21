@@ -75,15 +75,15 @@ const HorizontalVideo = ({ data }) => {
                             <div className={cx('config-separate')}></div>
                             <div className={cx('config-value')}>{data.publishSince}</div>
                         </div>
-                        <div className={cx('channel')}>
+                        <Link to={`/channel/${data.channelId}`} className={cx('channel')}>
                             <img className={cx('channel-thumbnail')} src={channel.thumbnail} alt={channel.title} />
                             <span className={cx('channel-name')}>{channel.title}</span>
-                            {channel.subscriberCount > 100000 && (
+                            {channel.tick && (
                                 <span className={cx('channel-tick')}>
                                     <TickIcon width="1.4rem" height="1.4rem" />
                                 </span>
                             )}
-                        </div>
+                        </Link>
                         <div className={cx('description')}>{data.description}</div>
                         {video.convertDuration === '0:00' && (
                             <span className={cx('live')}>

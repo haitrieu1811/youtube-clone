@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
+import classNames from 'classnames/bind';
 
 import CategorySlider from '~/components/CategorySlider';
 import GridStyles from '~/components/GridStyles';
@@ -6,8 +7,11 @@ import VerticalVideoSkeleton from '~/components/VerticalVideoSkeleton';
 import * as videoService from '~/services/videoService';
 import { CATEGORY_SLIDER_DATA } from './data';
 import CategorySliderLoading from '~/components/CategorySliderLoading';
+import styles from './Home.module.scss';
 
 const Video = React.lazy(() => import('~/components/VerticalVideo'));
+
+const cx = classNames.bind(styles);
 
 const Home = () => {
     const [query, setQuery] = useState('blv anh quan');
@@ -33,20 +37,22 @@ const Home = () => {
 
     return (
         <GridStyles>
-            <CategorySlider data={CATEGORY_SLIDER_DATA} onChangeCategory={handleChangeQuery} />
-            {isLoading && <CategorySliderLoading />}
+            <div className={cx('wrapper')}>
+                <CategorySlider data={CATEGORY_SLIDER_DATA} onChangeCategory={handleChangeQuery} />
+                {isLoading && <CategorySliderLoading />}
 
-            {videos && videos.length > 0 && !isLoading && (
-                <div className="row sm-gutter" style={{ marginTop: 24 }}>
-                    {videos.map((item, index) => (
-                        <div key={index} className="col l-3 m-6 c-12">
-                            <Suspense fallback={<VerticalVideoSkeleton />}>
-                                <Video data={item} />
-                            </Suspense>
-                        </div>
-                    ))}
-                </div>
-            )}
+                {videos && videos.length > 0 && !isLoading && (
+                    <div className="row sm-gutter" style={{ marginTop: 24 }}>
+                        {videos.map((item, index) => (
+                            <div key={index} className="col l-3 m-6 c-12">
+                                <Suspense fallback={<VerticalVideoSkeleton />}>
+                                    <Video data={item} />
+                                </Suspense>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </GridStyles>
     );
 };
