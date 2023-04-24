@@ -14,7 +14,7 @@ const Video = React.lazy(() => import('~/components/VerticalVideo'));
 const cx = classNames.bind(styles);
 
 const Home = () => {
-    const [query, setQuery] = useState('blv anh quan');
+    const [query, setQuery] = useState('ngoại hạng anh');
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 

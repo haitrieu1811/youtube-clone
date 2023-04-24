@@ -1,8 +1,7 @@
 export const CATEGORY_SLIDER_DATA = [
     {
-        label: 'BLV Anh Quân',
-        value: 'BLV Anh Quân',
-        active: true,
+        label: 'Ngoại Hạng Anh',
+        value: 'Ngoại Hạng Anh',
     },
     {
         label: 'Music',

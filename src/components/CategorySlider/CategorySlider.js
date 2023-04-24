@@ -13,9 +13,6 @@ const CategorySlider = ({ data, onChangeCategory = () => {} }) => {
     const [showPrev, setShowPrev] = useState(false);
     const [showNext, setShowNext] = useState(true);
 
-    console.log(position);
-    console.log(showPrev);
-
     const handleNext = () => {
         const newPosition = position - 100;
         setPosition(newPosition);
